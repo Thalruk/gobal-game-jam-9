@@ -8,6 +8,11 @@ public class MainMenu : MonoBehaviour
 
     [SerializeField] ParticleSystem cursorParticles;
     [SerializeField] Vector2 offset;
+
+    private void Awake()
+    {
+        Cursor.SetCursor(normalCursor, Vector2.zero, CursorMode.ForceSoftware);
+    }
     private void Update()
     {
         if (Input.GetMouseButtonDown(0))
