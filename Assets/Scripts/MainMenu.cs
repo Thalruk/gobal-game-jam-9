@@ -1,3 +1,4 @@
+using TMPro;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -8,6 +9,10 @@ public class MainMenu : MonoBehaviour
 
     [SerializeField] ParticleSystem cursorParticles;
     [SerializeField] Vector2 offset;
+
+    [Header("OPTIONS")]
+    [SerializeField] TMP_Dropdown resolutionDropdown;
+    [SerializeField] TMP_Dropdown screenMode;
 
     private void Awake()
     {
@@ -39,6 +44,35 @@ public class MainMenu : MonoBehaviour
     {
         SceneManager.LoadScene(name);
     }
+    public void Apply()
+    {
+        string[] values = resolutionDropdown.value.ToString().Split('x');
+        FullScreenMode mode = Screen.fullScreenMode;
+
+        switch (screenMode.value.ToString())
+        {
+            case "Fullscreen":
+                mode = FullScreenMode.FullScreenWindow;
+                break;
+            case "Windowed":
+                mode = FullScreenMode.Windowed;
+                break;
+            case "Borderless Window":
+                mode = FullScreenMode.MaximizedWindow;
+                break;
+            case "Exclusive Fullscreen":
+                mode = FullScreenMode.ExclusiveFullScreen;
+                break;
+            default:
+                break;
+        }
+        if (screenMode.value.ToString().Equals("Fullscreen"))
+        {
+            mode = FullScreenMode.FullScreenWindow;
+        }
+        Screen.SetResolution(int.Parse(values[0]), int.Parse(values[1]), mode);
+    }
+
     public void Exit()
     {
         Application.Quit();
