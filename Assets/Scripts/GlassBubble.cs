@@ -6,7 +6,7 @@ public class GlassBubble : Bubble
 {
     protected int numberOfSpikes = 10;
 
-    [SerializeField] protected GameObject glassSpikeslPrefab;
+    [SerializeField] protected GameObject glassSpikesPrefab;
     protected override void Init()
     {
         type = 2;
@@ -17,20 +17,20 @@ public class GlassBubble : Bubble
         windSensitivity = 0.5f;
     }
 
-    protected override void OnCollisionEnter(Collision collision)
+    protected override void OnCollisionEnter2D(Collision2D collision)
     {
-        base.OnCollisionEnter(collision);
+        base.OnCollisionEnter2D(collision);
     }
 
-    protected override void NormalAttack(Enemy enemy)
+    protected override void NormalAttack(GameObject enemy)
     {
-        enemy.GetDamage(damage);
+        enemy.GetComponent<Enemy>().GetDamage(damage);
 
         Destroy(gameObject);
     }
-    protected override void ChargedAttack(Enemy enemy)
+    protected override void ChargedAttack(GameObject enemy)
     {
-        enemy.GetDamage(damage);
+        enemy.GetComponent<Enemy>().GetDamage(damage);
         Explode();
 
         Destroy(gameObject);
@@ -40,8 +40,17 @@ public class GlassBubble : Bubble
     {
         for (int i = 0; i < numberOfSpikes; i++)
         {
-            GameObject spike = Instantiate(glassSpikeslPrefab);
+            GameObject spike = Instantiate(glassSpikesPrefab, transform.position, Quaternion.identity);
             spike.transform.rotation = Quaternion.Euler(0f, 0f, 360f / numberOfSpikes * i);
         }
+    }
+
+    private void Start()
+    {
+        Init();
+    }
+    private void Update()
+    {
+        transform.position += new Vector3(0.05f, 0f, 0f) * speed;
     }
 }

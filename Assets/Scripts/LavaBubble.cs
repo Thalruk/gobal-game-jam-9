@@ -15,20 +15,20 @@ public class LavaBubble : Bubble{
         windSensitivity = 0.3f;
     }
 
-    protected override void OnCollisionEnter(Collision collision)
+    protected override void OnCollisionEnter2D(Collision2D collision)
     {
-        base.OnCollisionEnter(collision);
+        base.OnCollisionEnter2D(collision);
     }
 
-    protected override void NormalAttack(Enemy enemy)
+    protected override void NormalAttack(GameObject enemy)
     {
-        enemy.GetDamage(damage);
+        enemy.GetComponent<Enemy>().GetDamage(damage);
 
         Destroy(gameObject);
     }
-    protected override void ChargedAttack(Enemy enemy)
+    protected override void ChargedAttack(GameObject enemy)
     {
-        enemy.GetDamage(damage);
+        enemy.GetComponent<Enemy>().GetDamage(damage);
         SpillOnFloor();
 
         Destroy(gameObject);
@@ -37,5 +37,11 @@ public class LavaBubble : Bubble{
     protected void SpillOnFloor() // spill lava on floor witch deal damage over time
     {
         GameObject lavaSpill = Instantiate(lavaSpillPrefab);
+        lavaSpill.GetComponent<Rigidbody2D>().AddForce(Vector2.up * 100f);
+    }
+
+    private void Start()
+    {
+        GetComponent<Rigidbody2D>().velocity = Vector2.right;
     }
 }

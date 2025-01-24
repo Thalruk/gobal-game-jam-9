@@ -14,35 +14,46 @@ public class StoneBubble : Bubble
         windSensitivity = 0.1f;
     }
 
-    protected override void OnCollisionEnter(Collision collision)
+    protected override void OnCollisionEnter2D(Collision2D collision)
     {
-        base.OnCollisionEnter(collision);
+        base.OnCollisionEnter2D(collision);
     }
 
-    protected override void NormalAttack(Enemy enemy)
+    protected override void NormalAttack(GameObject enemy)
     {
-        enemy.GetDamage(damage);
+        enemy.GetComponent<Enemy>().GetDamage(damage);
 
         Destroy(gameObject);
     }
-    protected override void ChargedAttack(Enemy enemy)
+    protected override void ChargedAttack(GameObject enemy)
     {
-        enemy.GetDamage(damage);
-        PushBack(enemy);
+        enemy.GetComponent<Enemy>().GetDamage(damage);
+        enemy.GetComponent<Enemy>().PushBack(GetComponent<Rigidbody2D>().velocity);
 
         Destroy(gameObject);
     }
 
-    protected void PushBack(Enemy enemy)
+    protected void PushBack(GameObject enemy)
     {
+        
         Vector2 enemyStartPosition = enemy.transform.position;
         Vector2 pushDirection = GetComponent<Rigidbody>().velocity.normalized;
-        Vector2 enemyFinalPosition = enemy.transform.position + pushDirection;
+        Vector2 enemyFinalPosition = (Vector2)enemy.transform.position + pushDirection;
 
         enemy.transform.position = Vector3.Lerp(enemyStartPosition, enemyFinalPosition, Time.deltaTime);
-        if (enemy.transform.position == enemyFinalPosition)
+        if ((Vector2)enemy.transform.position == enemyFinalPosition)
         {
             Destroy(gameObject);
         }
+    }
+
+    private void Start()
+    {
+        Init();
+        GetComponent<Rigidbody2D>().velocity = Vector2.right;
+    }
+    private void Update()
+    {
+        
     }
 }

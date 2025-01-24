@@ -16,23 +16,26 @@ public abstract class Bubble : MonoBehaviour
 
     protected virtual void Init() {}
 
-    protected virtual void OnCollisionEnter(Collision collision)
+    protected virtual void OnCollisionEnter2D(Collision2D collision)
     {
+        print("Collision");
         if(collision.gameObject.tag == "enemy")
         {
-            Enemy enemy = collision.gameObject.GetComponent<Enemy>();
+            GameObject enemy = collision.gameObject;
             // call funtion on hitted enemy
-            if (charged) // special attack
+            if (!charged) // special attack
             {
+                print("Charged attack");
                 ChargedAttack(enemy);
             }
             else // normal attack
             {
+                print("Normal attack");
                 NormalAttack(enemy);
             }
         }
     }
 
-    protected virtual void ChargedAttack(Enemy enemy) { }
-    protected virtual void NormalAttack(Enemy enemy) { }
+    protected virtual void ChargedAttack(GameObject enemy) { }
+    protected virtual void NormalAttack(GameObject enemy) { }
 }

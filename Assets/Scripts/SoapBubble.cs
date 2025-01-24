@@ -14,34 +14,50 @@ public class SoapBubble : Bubble
         windSensitivity = 1f;
     }
 
-    protected override void OnCollisionEnter(Collision collision)
+    protected override void OnCollisionEnter2D(Collision2D collision)
     {
-        base.OnCollisionEnter(collision);
+        base.OnCollisionEnter2D(collision);
     }
 
-    protected override void NormalAttack(Enemy enemy)
+    protected override void NormalAttack(GameObject enemy)
     {
-        enemy.GetDamage(damage);
+        enemy.GetComponent<Enemy>().GetDamage(damage);
 
         Destroy(gameObject);
     }
-    protected override void ChargedAttack(Enemy enemy)
+    protected override void ChargedAttack(GameObject enemy)
     {
-        enemy.GetDamage(damage);
-        FlyAway(enemy);
+        enemy.GetComponent<Enemy>().GetDamage(damage);
+        enemy.GetComponent<Enemy>().FlyAway();
 
-        Destroy(gameObject);
+        speed = 0;
+        Destroy(GetComponent<Rigidbody2D>());
+        gameObject.transform.position = enemy.transform.position;
+        gameObject.transform.localScale = new Vector2(3f, 3f);
+        gameObject.transform.SetParent(enemy.transform);
     }
 
-    protected void FlyAway(Enemy enemy)
+    protected void FlyAway(GameObject enemy)
     {
+        float time = 0f;
+        print("Fly");
         Vector2 enemyStartPosition = enemy.transform.position;
-        Vector2 enemyFinalPosition = enemy.transform.position + new Vector2(0f, 1f);
+        Vector2 enemyFinalPosition = enemyStartPosition + new Vector2(0f, 1f);
 
-        enemy.transform.position = Vector3.Lerp(enemyStartPosition, enemyFinalPosition, speed * Time.deltaTime);
-        if (enemy.transform.position == enemyFinalPosition)
+       
+        enemy.transform.position = Vector3.Lerp(enemyStartPosition, enemyFinalPosition, time += Time.deltaTime);
+        if ((Vector2)enemy.transform.position == enemyFinalPosition)
         {
             Destroy(gameObject);
         }
+    }
+
+    private void Start()
+    {
+        Init();
+    }
+    private void Update()
+    {
+        transform.position += new Vector3(0.05f, 0f, 0f) * speed;
     }
 }
