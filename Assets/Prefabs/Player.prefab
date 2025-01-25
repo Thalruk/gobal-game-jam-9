@@ -501,7 +501,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   speedDefault: 5
   speed: 5
-  jumpStrength: 5
+  jumpStrength: 10
   direction: {x: 1, y: 0}
   graphics: {fileID: 6033600627692307105}
   groundCheckTransform: {fileID: 6032091869618065402}
@@ -517,10 +517,10 @@ MonoBehaviour:
   chargedAmount: 0
   chargeSlider: {fileID: 8059320356238523536}
   bubbles:
-  - {fileID: 5072556952952347031, guid: 958a6787ba4a21744901809fef72434e, type: 3}
-  - {fileID: 5072556952952347031, guid: d3158b3c54301fb459e4deec563b57a5, type: 3}
   - {fileID: 5072556952952347031, guid: 7484e9618be65cc42b2c217e61effedb, type: 3}
   - {fileID: 5072556952952347031, guid: 4fccf35b50d6f134faa84291e52265ff, type: 3}
+  - {fileID: 5072556952952347031, guid: 958a6787ba4a21744901809fef72434e, type: 3}
+  - {fileID: 5072556952952347031, guid: d3158b3c54301fb459e4deec563b57a5, type: 3}
   boostAttack: 0
   ammoFillImage: {fileID: 0}
   ammoFillImages:
@@ -530,8 +530,8 @@ MonoBehaviour:
   - {fileID: 21300000, guid: e0237ebb0f75b40469f2eac0962f76ab, type: 3}
   heartHolder: {fileID: 0}
   heart: {fileID: 624116266207196298, guid: 281dc19a9ef460e4c90c98a0c52f3d9a, type: 3}
-  startingHealth: 0
-  currentHealth: 0
+  startingHealth: 2
+  currentHealth: 2
   invincible: 0
 --- !u!61 &1951882396194945990
 BoxCollider2D:
