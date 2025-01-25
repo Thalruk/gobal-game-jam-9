@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class Door : MonoBehaviour
@@ -10,10 +8,10 @@ public class Door : MonoBehaviour
     bool fade = false;
     float timeFade = 0f;
     Vector2 startPos;
- 
+
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        if(collision.gameObject.tag == "Player")
+        if (collision.gameObject.CompareTag("Player"))
         {
             startPos = Player.Instance.transform.position;
             GetComponent<SpriteRenderer>().sprite = openDoor;

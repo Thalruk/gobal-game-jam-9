@@ -35,7 +35,7 @@ public class Player : MonoBehaviour
     public bool boostAttack = false;
     [SerializeField] Image ammoFillImage;
     [SerializeField] Sprite[] ammoFillImages;
-    
+
     Bubble bubbleShield;
     GameObject bubbleShieldObj;
     bool isShield;
@@ -84,7 +84,7 @@ public class Player : MonoBehaviour
         }
 
         isGrounded = Physics2D.OverlapCircle(groundCheckTransform.transform.position, groundCheckRadius, mask);
-        
+
 
         if (Input.GetKeyDown(KeyCode.Space) && isGrounded)
         {
@@ -125,7 +125,7 @@ public class Player : MonoBehaviour
                 Rigidbody2D bubbleRigidbody2D = bubbleObject.GetComponent<Rigidbody2D>();
 
                 bubble.charged = (chargedAmount >= 1f);
-         
+
                 chargedAmount = 0;
                 chargeSlider.value = chargedAmount;
                 bubbleRigidbody2D.velocity = (direction.x < 0f) ? Vector2.left : Vector2.right;
@@ -141,7 +141,8 @@ public class Player : MonoBehaviour
                 }
             }
         }
-        if (Input.GetKey(KeyCode.Q) && !isShield && shieldCooldown == 0f) {
+        if (Input.GetKey(KeyCode.Q) && !isShield && shieldCooldown == 0f)
+        {
             bubbleShieldObj = Instantiate(bubbles[activeBubble], transform.position, Quaternion.identity);
             Destroy(bubbleShieldObj.GetComponent<Rigidbody2D>());
             bubbleShield = bubbleShieldObj.GetComponent<Bubble>();
@@ -152,7 +153,8 @@ public class Player : MonoBehaviour
             canMove = false;
             speed = 0;
         }
-        if (Input.GetKeyUp(KeyCode.Q) && isShield) {
+        if (Input.GetKeyUp(KeyCode.Q) && isShield)
+        {
             RemoveShield();
         }
         shieldCooldown = Mathf.Clamp(shieldCooldown - Time.deltaTime, 0f, 3f);
@@ -167,7 +169,7 @@ public class Player : MonoBehaviour
         else
         {
             timeHitted -= Time.deltaTime;
-            if(timeHitted < 0f)
+            if (timeHitted < 0f)
                 hitted = false;
         }
     }
@@ -178,7 +180,7 @@ public class Player : MonoBehaviour
         {
             ChangeHealth(-1);
         }
-        if(collision.gameObject.tag == "enemy")
+        if (collision.gameObject.tag == "enemy")
         {
             float hitDirection = (collision.gameObject.transform.position - transform.position).x;
             hitDirection = hitDirection < 0 ? 1 : -1;
@@ -190,7 +192,7 @@ public class Player : MonoBehaviour
             hitted = true;
             timeHitted = 1f;
             rb.velocity = new Vector2(3f * hitDirection, 3f);
-            
+
         }
     }
 
