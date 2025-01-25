@@ -13,7 +13,7 @@ public class Player : MonoBehaviour
     [SerializeField] int speedDefault;
     [SerializeField] int speed;
     [SerializeField] int jumpStrength;
-    [SerializeField] Vector2 direction = Vector2.right;
+    [SerializeField] public Vector2 direction = Vector2.right;
     [SerializeField] GameObject graphics;
     bool canMove = true;
     [Space]
@@ -38,6 +38,8 @@ public class Player : MonoBehaviour
     GameObject bubbleShieldObj;
     bool isShield;
     float shieldCooldown = 0f;
+    bool hitted = false;
+    float timeHitted = 0f;
 
     [Space]
     [Header("Health")]
@@ -77,6 +79,7 @@ public class Player : MonoBehaviour
         }
 
         isGrounded = Physics2D.OverlapCircle(groundCheckTransform.transform.position, groundCheckRadius, mask);
+        
 
         if (Input.GetKeyDown(KeyCode.Space) && isGrounded)
         {
@@ -149,9 +152,16 @@ public class Player : MonoBehaviour
 
     private void FixedUpdate()
     {
-    
-        rb.velocity = new Vector2(horizontal * speed, rb.velocity.y);
- 
+        if (!hitted)
+        {
+            rb.velocity = new Vector2(horizontal * speed, rb.velocity.y);
+        }
+        else
+        {
+            timeHitted -= Time.deltaTime;
+            if(timeHitted < 0f)
+                hitted = false;
+        }
     }
 
     private void OnCollisionEnter2D(Collision2D collision)
@@ -162,7 +172,17 @@ public class Player : MonoBehaviour
         }
         if(collision.gameObject.tag == "enemy")
         {
-            rb.AddForce(new Vector2(-100f, 100f));
+            float hitDirection = (collision.gameObject.transform.position - transform.position).x;
+            hitDirection = hitDirection < 0 ? 1 : -1;
+
+            //canMove = false;
+            //speed = 0;
+            //rb.AddForce(new Vector2(1000f * hitDirection, 100f));
+
+            hitted = true;
+            timeHitted = 1f;
+            rb.velocity = new Vector2(3f * hitDirection, 3f);
+            
         }
     }
 

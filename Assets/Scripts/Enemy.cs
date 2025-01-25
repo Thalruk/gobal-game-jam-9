@@ -15,6 +15,8 @@ public class Enemy : MonoBehaviour
     Rigidbody2D rb;
     [SerializeField] float walkTime = 0f;
     float lavaCooldown = 0f;
+    bool hitted = false;
+    float timeHitted = 0f;
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
@@ -56,13 +58,28 @@ public class Enemy : MonoBehaviour
 
         if(Vector2.Distance(Player.Instance.transform.position, transform.position) < 5f)
         {
-            Shoot();
+            if (!hitted)
+            {
+                Shoot();
+            }
+            else
+            {
+            timeHitted -= Time.deltaTime;
+            if (timeHitted < 0f)
+                hitted = false;
+            }
         }
         else
         {
-            if (!fly)
+            if (!hitted)
             {
                 Patrol();
+            }
+            else
+            {
+                timeHitted -= Time.deltaTime;
+                if (timeHitted < 0f)
+                    hitted = false;
             }
         }
     }
@@ -79,8 +96,11 @@ public class Enemy : MonoBehaviour
         }
         if(collision.gameObject.tag == "Player")
         {
-            FlyAway();
-            PushBack(Player.Instance.GetComponent<Rigidbody2D>().velocity);
+            float hitDirection = (collision.gameObject.transform.position - transform.position).x;
+            hitDirection = hitDirection < 0 ? 1 : -1;
+            hitted = true;
+            timeHitted = 1f;
+            rb.velocity = new Vector2(1f * hitDirection, 3f);
         }
     }
 
@@ -113,7 +133,7 @@ public class Enemy : MonoBehaviour
         pushVector.y += 10f;
 
         fly = true;
-        GetComponent<Rigidbody2D>().AddForce(new Vector2(0f, pushVector.y));
+        rb.AddForce(new Vector2(0f, pushVector.y));
 
     }
 
@@ -124,7 +144,7 @@ public class Enemy : MonoBehaviour
         startPosition = transform.position;
         endPosition = startPosition + pushVector;
 
-        GetComponent<Rigidbody2D>().AddForce(new Vector2(pushVector.x, 0f));
+        rb.AddForce(new Vector2(pushVector.x, 0f));
 
         pushBack = true;
         //print(pushVector);
