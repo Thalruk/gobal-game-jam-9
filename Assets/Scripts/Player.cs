@@ -1,4 +1,6 @@
 using UnityEngine;
+using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public class Player : MonoBehaviour
 {
@@ -22,8 +24,10 @@ public class Player : MonoBehaviour
     [Header("Ammo")]
     [SerializeField] int activeBubble = 0;
     [SerializeField] int ammo = 10;
+    [SerializeField] Slider ammoSlider;
     bool canShoot = true;
-    float chargedAmmount = 0f;
+    [SerializeField] float chargedAmount = 0f;
+    [SerializeField] Slider chargeSlider;
     [SerializeField] GameObject[] bubbles;
     [Space]
     [Header("Health")]
@@ -31,6 +35,7 @@ public class Player : MonoBehaviour
     [SerializeField] GameObject heart;
     [SerializeField] int startingHealth;
     [SerializeField] public int currentHealth;
+    [SerializeField] bool invincible = false;
     private void Awake()
     {
         if (Instance != null && Instance != this)
@@ -41,11 +46,8 @@ public class Player : MonoBehaviour
 
         rb = GetComponent<Rigidbody2D>();
         ChangeHealth(startingHealth);
+        ammoSlider.maxValue = ammo;
 
-        for (int i = 0; i < currentHealth; i++)
-        {
-            Instantiate(heart, heartHolder.transform);
-        }
     }
 
     private void Update()
@@ -72,7 +74,8 @@ public class Player : MonoBehaviour
 
         if (Input.GetMouseButton(0) && canShoot)
         {
-            chargedAmmount = Mathf.Clamp(chargedAmmount + Time.deltaTime, 0, 1);
+            chargedAmount = Mathf.Clamp(chargedAmount + Time.deltaTime, 0, 1);
+            chargeSlider.value = chargedAmount;
         }
         if (Input.GetMouseButtonUp(0) && canShoot)
         {
@@ -82,13 +85,15 @@ public class Player : MonoBehaviour
             {
                 Rigidbody2D bubbleRigidbody2D = bubbleObject.GetComponent<Rigidbody2D>();
 
-                bubble.charged = (chargedAmmount >= 1f);
-                chargedAmmount = 0;
+                bubble.charged = (chargedAmount >= 1f);
+                chargedAmount = 0;
+                chargeSlider.value = chargedAmount;
                 bubbleRigidbody2D.velocity = (direction.x < 0f) ? Vector2.left : Vector2.right;
                 bubbleRigidbody2D.velocity += (Vector2.right * horizontal);
 
                 bubble.Init();
                 ammo -= bubble.ammoCost;
+                ammoSlider.value = ammo;
                 print(bubble.ammoCost);
                 if (ammo <= 0)
                 {
@@ -113,13 +118,44 @@ public class Player : MonoBehaviour
         rb.velocity = new Vector2(horizontal * speed, rb.velocity.y);
     }
 
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        if (collision.transform.CompareTag("trap"))
+        {
+            ChangeHealth(-1);
+        }
+    }
+
     public void ChangeHealth(int value)
     {
-        currentHealth += value;
 
+        if (value < 0 && invincible == false)
+        {
+            heartHolder.transform.GetChild(heartHolder.transform.childCount - 1).GetComponent<Animator>().Play("HeartBoom");
+            invincible = true;
+            Invoke(nameof(TurnOffInvicibility), 0.5f);
+        }
+
+        if (value > 0)
+        {
+            currentHealth += value;
+            for (int i = 0; i < value; i++)
+            {
+                Instantiate(heart, heartHolder.transform);
+            }
+        }
+    }
+
+    public void CheckHealth()
+    {
         if (currentHealth == 0)
         {
             Destroy(gameObject);
+            SceneManager.LoadScene(SceneManager.GetActiveScene().name);
         }
+    }
+    private void TurnOffInvicibility()
+    {
+        invincible = false;
     }
 }
