@@ -130,7 +130,7 @@ public class Player : MonoBehaviour
         if (Input.GetMouseButtonUp(0) && canShoot)
         {
             restDelay = 1f;
-            Vector2 pos = (Vector2)transform.position - new Vector2(0f, 0.7f);
+            Vector2 pos = (Vector2)transform.position;
             GameObject bubbleObject = Instantiate(bubbles[activeBubble], pos, Quaternion.identity);
             Bubble bubble = bubbleObject.GetComponent<Bubble>();
             if (ammo[activeBubble] >= bubble.ammoCost)
