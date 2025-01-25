@@ -26,4 +26,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Lepsze Pjotera.unity
     guid: 85fde7f280767f445b1cae34c44548b9
+  - enabled: 1
+    path: Assets/Scenes/lvl1.unity
+    guid: 5be09168032243d4281cc5353529305a
   m_configObjects: {}
