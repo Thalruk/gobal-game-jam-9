@@ -10,6 +10,8 @@ public class Player : MonoBehaviour
 
     Rigidbody2D rb;
 
+    public AudioSource source;
+
     [SerializeField] int speedDefault;
     [SerializeField] int speed;
     [SerializeField] int jumpStrength;
@@ -81,14 +83,14 @@ public class Player : MonoBehaviour
             direction = Vector2.left;
             graphics.GetComponent<SpriteRenderer>().flipX = true;
         }
-        else if(horizontal == 0 && restDelay <= 0f)
+        else if (horizontal == 0 && restDelay <= 0f)
         {
             refillAmmoTime += Time.deltaTime;
-            if(refillAmmoTime > 1f)
+            if (refillAmmoTime > 1f)
             {
                 ammo[0] = Mathf.Clamp(ammo[0] + 1, 0, maxAmmo);
                 refillAmmoTime = 0f;
-                if(activeBubble == 0)
+                if (activeBubble == 0)
                 {
                     ammoSlider.value = ammo[0];
                 }
@@ -110,7 +112,7 @@ public class Player : MonoBehaviour
             print("Active bubble: " + activeBubble);
             ammoFillImage.sprite = ammoFillImages[activeBubble];
             ChangeAmmo(activeBubble, 0);
-            
+
         }
         else if (Input.GetAxis("Mouse ScrollWheel") < 0f) // backwards
         {

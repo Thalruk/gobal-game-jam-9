@@ -1,7 +1,4 @@
-using Unity.VisualScripting;
-using UnityEditor.Experimental.GraphView;
 using UnityEngine;
-using UnityEngine.UI;
 
 public class Enemy : MonoBehaviour
 {
@@ -59,7 +56,7 @@ public class Enemy : MonoBehaviour
             }
         }
 
-        if(Vector2.Distance(Player.Instance.transform.position, transform.position) < 5f)
+        if (Vector2.Distance(Player.Instance.transform.position, transform.position) < 5f)
         {
             if (!hitted)
             {
@@ -67,9 +64,9 @@ public class Enemy : MonoBehaviour
             }
             else
             {
-            timeHitted -= Time.deltaTime;
-            if (timeHitted < 0f)
-                hitted = false;
+                timeHitted -= Time.deltaTime;
+                if (timeHitted < 0f)
+                    hitted = false;
             }
         }
         else
@@ -89,15 +86,15 @@ public class Enemy : MonoBehaviour
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        if(collision.gameObject.tag == "Bubble")
+        if (collision.gameObject.tag == "Bubble")
         {
             hp -= collision.gameObject.GetComponent<Bubble>().damage;
-            if(hp <= 0f)
+            if (hp <= 0f)
             {
                 Destroy(gameObject);
             }
         }
-        if(collision.gameObject.tag == "Player")
+        if (collision.gameObject.tag == "Player")
         {
             float hitDirection = (collision.gameObject.transform.position - transform.position).x;
             hitDirection = hitDirection < 0 ? 1 : -1;
@@ -116,7 +113,7 @@ public class Enemy : MonoBehaviour
     }
     private void OnTriggerStay2D(Collider2D collision)
     {
-        if(collision.gameObject.tag == "Lava")
+        if (collision.gameObject.tag == "Lava")
         {
             lavaCooldown -= Time.deltaTime;
             if (lavaCooldown < 0f)
@@ -161,7 +158,7 @@ public class Enemy : MonoBehaviour
         transform.rotation = Quaternion.Euler(new Vector3(0f, 0f, 180f));
         rb.velocity = new Vector2(Mathf.Sin(walkTime) * 3f, 0f);
         walkTime = (walkTime + Time.deltaTime) % (Mathf.PI * 2f);
-        if(walkTime < Mathf.PI)
+        if (walkTime < Mathf.PI)
         {
             GetComponent<SpriteRenderer>().flipX = true;
             rotationTime -= Time.deltaTime * 360f;
@@ -187,13 +184,13 @@ public class Enemy : MonoBehaviour
         {
             canShoot = false;
             shootDelay = 3f;
-            
+
             GameObject spikeObject = Instantiate(spikePrefab, transform.position, Quaternion.identity);
             spikeObject.transform.rotation = Quaternion.Euler(0f, 0f, -90f * direction);
             spikeObject.GetComponent<Spike>().vel = Vector2.right * direction * 5;
             //spikeObject.GetComponent<Rigidbody2D>().velocity = Vector2.right * direction * 5;
         }
-        else if(shootDelay > 0f)
+        else if (shootDelay > 0f)
         {
             shootDelay -= Time.deltaTime;
         }

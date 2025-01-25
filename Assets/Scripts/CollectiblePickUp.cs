@@ -3,6 +3,7 @@ using UnityEngine;
 public class CollectiblePickUp : PickUpBase
 {
     [SerializeField] public bool optional = false;
+    [SerializeField] AudioClip collectOptionalSound;
 
     private void Start()
     {
@@ -20,10 +21,13 @@ public class CollectiblePickUp : PickUpBase
         if (optional)
         {
             LevelManager.Instance.scoreOptional++;
+            Player.Instance.source.clip = collectOptionalSound;
         }
         else
         {
             LevelManager.Instance.score++;
+            Player.Instance.source.clip = collectSound;
         }
+        Player.Instance.source.Play();
     }
 }

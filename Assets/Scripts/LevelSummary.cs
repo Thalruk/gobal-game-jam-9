@@ -18,6 +18,7 @@ public class LevelSummary : MonoBehaviour
     private void Awake()
     {
         Cursor.visible = true;
+        Cursor.lockState = CursorLockMode.Confined;
 
         LevelManager.Instance.timerStopped = true;
 

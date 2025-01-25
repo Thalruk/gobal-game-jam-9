@@ -9,6 +9,10 @@ public class SceneListHolder : MonoBehaviour
 
     private void Awake()
     {
+
+        Cursor.visible = true;
+        Cursor.lockState = CursorLockMode.Confined;
+
         foreach (string sceneName in sceneList)
         {
             SceneHolder sceneHolder = Instantiate(holder, transform);

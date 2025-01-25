@@ -1,16 +1,22 @@
 using UnityEngine;
-
+[RequireComponent(typeof(AudioSource))]
 public class Door : MonoBehaviour
 {
     [SerializeField] Sprite openDoor;
     [SerializeField] Canvas canvas;
     [SerializeField] GameObject levelFinishUI;
 
+    AudioSource source;
+
     bool fade = false;
     float timeFade = 0f;
     bool summarySpawned = false;
     Vector2 startPos;
 
+    private void Awake()
+    {
+        source = GetComponent<AudioSource>();
+    }
     private void OnCollisionEnter2D(Collision2D collision)
     {
         if (collision.gameObject.CompareTag("Player"))
@@ -18,6 +24,7 @@ public class Door : MonoBehaviour
             startPos = Player.Instance.transform.position;
             GetComponent<SpriteRenderer>().sprite = openDoor;
             fade = true;
+            source.Play();
         }
     }
 
