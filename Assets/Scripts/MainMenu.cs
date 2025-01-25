@@ -16,9 +16,6 @@ public class MainMenu : MonoBehaviour
     [SerializeField] TMP_Dropdown screenModeDropdown;
     [SerializeField] TMP_Dropdown fpsDropdown;
 
-    [Header("SOUND")]
-    [SerializeField] TMP_Dropdown durationDropdown;
-
     private void Awake()
     {
         Cursor.SetCursor(normalCursor, Vector2.zero, CursorMode.ForceSoftware);
@@ -53,10 +50,10 @@ public class MainMenu : MonoBehaviour
     }
     public void Apply()
     {
-        string[] values = resolutionDropdown.value.ToString().Split('x');
+        string[] values = resolutionDropdown.options[resolutionDropdown.value].text.Split('x');
         FullScreenMode mode = Screen.fullScreenMode;
 
-        switch (screenModeDropdown.value.ToString())
+        switch (screenModeDropdown.options[screenModeDropdown.value].text)
         {
             case "Fullscreen":
                 mode = FullScreenMode.FullScreenWindow;
@@ -73,12 +70,8 @@ public class MainMenu : MonoBehaviour
             default:
                 break;
         }
-        if (screenModeDropdown.value.ToString().Equals("Fullscreen"))
-        {
-            mode = FullScreenMode.FullScreenWindow;
-        }
         Screen.SetResolution(int.Parse(values[0]), int.Parse(values[1]), mode);
-        Application.targetFrameRate = fpsDropdown.value;
+        Application.targetFrameRate = int.Parse(fpsDropdown.options[fpsDropdown.value].text);
     }
 
     public void Exit()
