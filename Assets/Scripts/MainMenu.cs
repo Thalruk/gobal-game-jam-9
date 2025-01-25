@@ -1,3 +1,4 @@
+using System.Threading.Tasks;
 using TMPro;
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -40,12 +41,14 @@ public class MainMenu : MonoBehaviour
             cursorAudioSource.Stop();
         }
     }
-    public void LoadLevel(int index)
+    public async void LoadLevel(int index)
     {
+        await Task.Delay(150);
         SceneManager.LoadScene(index);
     }
-    public void LoadLevel(string name)
+    public async void LoadLevel(string name)
     {
+        await Task.Delay(150);
         SceneManager.LoadScene(name);
     }
     public void Apply()
