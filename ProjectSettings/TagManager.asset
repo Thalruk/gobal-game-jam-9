@@ -11,6 +11,8 @@ TagManager:
   - Bubble
   - Shield
   - Spike
+  - Lava
+  - Block
   layers:
   - Default
   - TransparentFX

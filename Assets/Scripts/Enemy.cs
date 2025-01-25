@@ -13,6 +13,8 @@ public class Enemy : MonoBehaviour
     float timeFly = 0f, timePush = 0f;
     Vector2 startPosition, endPosition, pushVector;
     Rigidbody2D rb;
+    [SerializeField] float walkTime = 0f;
+    float lavaCooldown = 0f;
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
@@ -31,8 +33,11 @@ public class Enemy : MonoBehaviour
             timeFly += Time.deltaTime;
             if (rb.velocity.y == 0f)
             {
-                Destroy(gameObject.transform.GetChild(0).gameObject);
-                GetComponent<Rigidbody2D>().gravityScale = 1f;
+                if (gameObject.transform.childCount > 0)
+                {
+                    Destroy(gameObject.transform.GetChild(0).gameObject);
+                }
+                GetComponent<Rigidbody2D>().gravityScale = 10f;
                 fly = false;
                 pushVector.y = 0f;
             }
@@ -49,13 +54,16 @@ public class Enemy : MonoBehaviour
             }
         }
 
-        if(Vector2.Distance(Player.Instance.transform.position, transform.position) < 10f)
+        if(Vector2.Distance(Player.Instance.transform.position, transform.position) < 5f)
         {
             Shoot();
         }
         else
         {
-            Patrol();
+            if (!fly)
+            {
+                Patrol();
+            }
         }
     }
 
@@ -69,6 +77,33 @@ public class Enemy : MonoBehaviour
                 Destroy(gameObject);
             }
         }
+        if(collision.gameObject.tag == "Player")
+        {
+            FlyAway();
+            PushBack(Player.Instance.GetComponent<Rigidbody2D>().velocity);
+        }
+    }
+
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.gameObject.tag == "Lava")
+        {
+            lavaCooldown = 1f;
+        }
+    }
+    private void OnTriggerStay2D(Collider2D collision)
+    {
+        if(collision.gameObject.tag == "Lava")
+        {
+            lavaCooldown -= Time.deltaTime;
+            if (lavaCooldown < 0f)
+            {
+                lavaCooldown = 1f;
+                hp -= (collision.gameObject.transform.parent.GetComponent<LavaSpill>().damage);
+                if (hp <= 0f)
+                    Destroy(gameObject);
+            }
+        }
     }
 
     public void GetDamage(int damage) { }
@@ -77,9 +112,9 @@ public class Enemy : MonoBehaviour
         timeFly = 0f;
         pushVector.y += 10f;
 
+        fly = true;
         GetComponent<Rigidbody2D>().AddForce(new Vector2(0f, pushVector.y));
 
-        fly = true;
     }
 
     public void PushBack(Vector2 _pushVector)
@@ -97,11 +132,13 @@ public class Enemy : MonoBehaviour
 
     private void Patrol()
     {
-
+        rb.velocity = new Vector2(Mathf.Sin(walkTime) * 3f, 0f);
+        walkTime = (walkTime + Time.deltaTime) % (Mathf.PI * 2f);
     }
 
     private void Shoot()
     {
+        rb.velocity = Vector2.zero;
         if (canShoot)
         {
             canShoot = false;

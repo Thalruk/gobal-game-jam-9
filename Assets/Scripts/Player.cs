@@ -144,7 +144,6 @@ public class Player : MonoBehaviour
         if (Input.GetKeyUp(KeyCode.Q) && isShield) {
             RemoveShield();
         }
-        print(shieldCooldown);
         shieldCooldown = Mathf.Clamp(shieldCooldown - Time.deltaTime, 0f, 3f);
     }
 
@@ -160,6 +159,10 @@ public class Player : MonoBehaviour
         if (collision.transform.CompareTag("trap"))
         {
             ChangeHealth(-1);
+        }
+        if(collision.gameObject.tag == "enemy")
+        {
+            rb.AddForce(new Vector2(-100f, 100f));
         }
     }
 

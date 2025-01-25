@@ -38,6 +38,7 @@ public class Spike : MonoBehaviour
         if(collision.gameObject.tag == "Player")
         {
             Destroy(gameObject);
+            Player.Instance.currentHealth -= damage;
         }
     }
 }

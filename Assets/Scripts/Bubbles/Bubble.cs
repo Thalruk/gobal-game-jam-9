@@ -6,7 +6,7 @@ using UnityEngine;
 
 public abstract class Bubble : MonoBehaviour
 {
-    protected int type; // bubble type: 0 - soap, 1 - stone, 2 - glass, 3 - lava
+    public int type; // bubble type: 0 - soap, 1 - stone, 2 - glass, 3 - lava
     public int ammoCost; // 1, 2, 3, 4
     public int damage; // 1, 2, 3, 4
     public int hp; // 1, 4, 2, 3

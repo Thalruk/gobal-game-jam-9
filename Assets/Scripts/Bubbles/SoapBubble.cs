@@ -28,6 +28,7 @@ public class SoapBubble : Bubble
     }
     protected override void ChargedAttack(GameObject enemy)
     {
+        enemy.GetComponent<Rigidbody2D>().velocity = Vector2.zero;
         enemy.GetComponent<Enemy>().GetDamage(damage);
         enemy.GetComponent<Enemy>().FlyAway();
 

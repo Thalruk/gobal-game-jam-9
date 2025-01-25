@@ -5,6 +5,8 @@ using UnityEngine;
 public class LavaSpill : MonoBehaviour
 {
     // Start is called before the first frame update
+
+    public int damage = 1;
     void Start()
     {
         Physics2D.IgnoreLayerCollision(7, 9);
