@@ -3,7 +3,9 @@ using UnityEngine;
 public class Elevator : MonoBehaviour
 {
     [SerializeField] Transform from;
+    [SerializeField] float minScale = 0.5f;
     [SerializeField] Transform to;
+    [SerializeField] float maxScale = 1.5f;
 
     [SerializeField] GameObject elevatorPrefab;
     [SerializeField] GameObject elevatorObject;
@@ -14,7 +16,8 @@ public class Elevator : MonoBehaviour
     {
         elevatorObject = Instantiate(elevatorPrefab, from.transform.position, Quaternion.identity, transform);
         direction = (to.position - from.position).normalized;
-        elevatorObject.GetComponent<Rigidbody2D>().velocity = direction * speed;
+        elevatorObject.transform.localScale *= Random.Range(minScale, maxScale);
+        elevatorObject.GetComponent<Rigidbody2D>().velocity = direction * speed * Random.Range(minScale, maxScale);
     }
 
     private void Update()
