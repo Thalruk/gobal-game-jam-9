@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class Enemy : MonoBehaviour
@@ -7,10 +5,10 @@ public class Enemy : MonoBehaviour
     bool fly = false, pushBack = false;
     float timeFly = 0f, timePush = 0f;
     Vector2 startPosition, endPosition, pushVector;
-    Rigidbody2D rigidbody2D;
+    Rigidbody2D rb;
     void Start()
     {
-        rigidbody2D = GetComponent<Rigidbody2D>();
+        rb = GetComponent<Rigidbody2D>();
         pushVector = Vector2.zero;
     }
 
@@ -19,12 +17,12 @@ public class Enemy : MonoBehaviour
     {
         if (fly)
         {
-            rigidbody2D.gravityScale = 0f;
+            rb.gravityScale = 0f;
             //transform.position = new Vector2(transform.position.x + pushVector.x, transform.position.y + pushVector.y);
             //pushVector.y = Mathf.Lerp(0.01f, 0f, timeFly);
-            rigidbody2D.velocity = new Vector2(rigidbody2D.velocity.x, Mathf.Lerp(10f, 0f, timeFly));
+            rb.velocity = new Vector2(rb.velocity.x, Mathf.Lerp(10f, 0f, timeFly));
             timeFly += Time.deltaTime;
-            if (rigidbody2D.velocity.y == 0f)
+            if (rb.velocity.y == 0f)
             {
                 Destroy(gameObject.transform.GetChild(0).gameObject);
                 GetComponent<Rigidbody2D>().gravityScale = 1f;
@@ -37,7 +35,7 @@ public class Enemy : MonoBehaviour
             //transform.position = new Vector2 (transform.position.x + pushVector.x, transform.position.y + pushVector.y);
             //pushVector.x = Mathf.Lerp(0.5f, 0f, timePush);
             timePush += Time.deltaTime;
-            if (rigidbody2D.velocity.x == 0f)
+            if (rb.velocity.x == 0f)
             {
                 pushBack = false;
                 pushVector.x = 0f;
