@@ -38,7 +38,6 @@ public class LevelSummary : MonoBehaviour
         PlayerPrefs.SetFloat($"{SceneManager.GetActiveScene().name} time", LevelManager.Instance.timer);
         PlayerPrefs.SetFloat($"{SceneManager.GetActiveScene().name} score percent", LevelManager.Instance.score / LevelManager.Instance.scoreMax);
         PlayerPrefs.SetFloat($"{SceneManager.GetActiveScene().name} optional score percent", LevelManager.Instance.scoreOptional / LevelManager.Instance.scoreMaxOptional);
-        PlayerPrefs.SetFloat($"{SceneManager.GetActiveScene().name} time", LevelManager.Instance.timer);
         PlayerPrefs.Save();
 
         //zrobic slider i procenty i gwiazdki w zaleznosci od zebrania

@@ -6,8 +6,10 @@ using UnityEngine.UI;
 public class SceneHolder : MonoBehaviour
 {
     [SerializeField] public TextMeshProUGUI sceneName;
-    [SerializeField] public TextMeshProUGUI sceneScore;
     [SerializeField] public TextMeshProUGUI sceneTime;
+    [SerializeField] public GameObject finishStar;
+    [SerializeField] public GameObject scoreStar;
+    [SerializeField] public GameObject scoreOptionalStar;
 
     private void Start()
     {
