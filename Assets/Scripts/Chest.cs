@@ -55,6 +55,11 @@ public class Chest : MonoBehaviour
                 showTime = 1f;
                 isShowing = false;
                 fading = true;
+                Player.Instance.ammo[ammoType] = Player.Instance.maxAmmo;
+                if(Player.Instance.activeBubble == ammoType)
+                {
+                    Player.Instance.ammoSlider.value = Player.Instance.ammo[ammoType];
+                }
             }
         }
         if (fading)

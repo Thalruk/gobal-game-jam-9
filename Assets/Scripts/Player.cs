@@ -24,14 +24,16 @@ public class Player : MonoBehaviour
     [SerializeField] LayerMask mask;
     [Space]
     [Header("Ammo")]
-    [SerializeField] int activeBubble = 0;
+    [SerializeField] public int activeBubble = 0;
     [SerializeField] public int[] ammo;
-    [SerializeField] int maxAmmo = 32;
-    [SerializeField] Slider ammoSlider;
+    [SerializeField] public int maxAmmo = 32;
+    [SerializeField] public Slider ammoSlider;
     bool canShoot = true;
     [SerializeField] GameObject[] bubbles;
     [SerializeField] Image ammoFillImage;
     [SerializeField] Sprite[] ammoFillImages;
+    [SerializeField] float refillAmmoTime = 0f;
+    [SerializeField] float restDelay = 1f;
 
     Bubble bubbleShield;
     GameObject bubbleShieldObj;
@@ -60,8 +62,8 @@ public class Player : MonoBehaviour
         rb = GetComponent<Rigidbody2D>();
         ChangeHealth(startingHealth);
         ChangeAmmo(0, maxAmmo);
-        //ammoSlider.maxValue = maxAmmo;
-        //ammoFillImage.sprite = ammoFillImages[activeBubble];
+        ammoSlider.maxValue = maxAmmo;
+        ammoFillImage.sprite = ammoFillImages[activeBubble];
 
 
     }
@@ -79,6 +81,19 @@ public class Player : MonoBehaviour
             direction = Vector2.left;
             graphics.GetComponent<SpriteRenderer>().flipX = true;
         }
+        else if(horizontal == 0 && restDelay <= 0f)
+        {
+            refillAmmoTime += Time.deltaTime;
+            if(refillAmmoTime > 1f)
+            {
+                ammo[0] = Mathf.Clamp(ammo[0] + 1, 0, maxAmmo);
+                refillAmmoTime = 0f;
+                if(activeBubble == 0)
+                {
+                    ammoSlider.value = ammo[0];
+                }
+            }
+        }
 
         isGrounded = Physics2D.OverlapCircle(groundCheckTransform.transform.position, groundCheckRadius, mask);
 
@@ -94,12 +109,15 @@ public class Player : MonoBehaviour
             activeBubble = (activeBubble + 1) % 4;
             print("Active bubble: " + activeBubble);
             ammoFillImage.sprite = ammoFillImages[activeBubble];
+            ChangeAmmo(activeBubble, 0);
+            
         }
         else if (Input.GetAxis("Mouse ScrollWheel") < 0f) // backwards
         {
             activeBubble = activeBubble - 1 < 0 ? 3 : activeBubble - 1;
             print("Active bubble: " + activeBubble);
             ammoFillImage.sprite = ammoFillImages[activeBubble];
+            ChangeAmmo(activeBubble, 0);
         }
 
         if (Input.GetMouseButtonDown(0) && ammo[activeBubble] > 0 && !isShield)
@@ -109,6 +127,7 @@ public class Player : MonoBehaviour
 
         if (Input.GetMouseButtonUp(0) && canShoot)
         {
+            restDelay = 1f;
             Vector2 pos = (Vector2)transform.position - new Vector2(0f, 0.7f);
             GameObject bubbleObject = Instantiate(bubbles[activeBubble], pos, Quaternion.identity);
             Bubble bubble = bubbleObject.GetComponent<Bubble>();
@@ -144,6 +163,7 @@ public class Player : MonoBehaviour
             RemoveShield();
         }
         shieldCooldown = Mathf.Clamp(shieldCooldown - Time.deltaTime, 0f, 3f);
+        restDelay = Mathf.Clamp(restDelay - Time.deltaTime, 0f, 1f);
     }
 
     private void FixedUpdate()
@@ -206,7 +226,7 @@ public class Player : MonoBehaviour
     public void ChangeAmmo(int type, int value)
     {
         ammo[type] = Mathf.Clamp(ammo[type] + value, 0, maxAmmo);
-        //ammoSlider.value = ammo;
+        ammoSlider.value = ammo[type];
     }
 
     public void CheckHealth()
