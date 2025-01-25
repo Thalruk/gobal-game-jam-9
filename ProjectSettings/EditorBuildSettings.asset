@@ -14,4 +14,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Bartek.unity
     guid: e10503f2cdb4b774bb3f03845c486a64
+  - enabled: 1
+    path: Assets/Scenes/Intro.unity
+    guid: 66a3d399b5da0384dbb95bce5c02ee5a
   m_configObjects: {}
