@@ -1,3 +1,4 @@
+using TMPro;
 using UnityEngine;
 
 public class LevelManager : MonoBehaviour
@@ -7,6 +8,12 @@ public class LevelManager : MonoBehaviour
     [SerializeField] public int scoreOptional;
     [SerializeField] public int scoreMax;
     [SerializeField] public int scoreMaxOptional;
+
+    [SerializeField] public float timer = 0;
+    [SerializeField] public bool timerStopped;
+    [SerializeField] TextMeshProUGUI timerText;
+
+    [SerializeField] public string nextLevel;
 
     private void Awake()
     {
@@ -19,18 +26,13 @@ public class LevelManager : MonoBehaviour
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
 
-        Object[] orbs = Resources.FindObjectsOfTypeAll(typeof(CollectiblePickUp));
-
-        foreach (Object item in orbs)
+    }
+    private void Update()
+    {
+        if (!timerStopped)
         {
-            if (((CollectiblePickUp)item).optional == false)
-            {
-                scoreMax++;
-            }
-            else
-            {
-                scoreMaxOptional++;
-            }
+            timer += Time.deltaTime;
         }
+        timerText.text = timer.ToString("0.00");
     }
 }

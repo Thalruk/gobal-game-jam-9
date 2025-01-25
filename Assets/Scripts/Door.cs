@@ -3,9 +3,12 @@ using UnityEngine;
 public class Door : MonoBehaviour
 {
     [SerializeField] Sprite openDoor;
+    [SerializeField] Canvas canvas;
+    [SerializeField] GameObject levelFinishUI;
 
     bool fade = false;
     float timeFade = 0f;
+    bool summarySpawned = false;
     Vector2 startPos;
 
     private void OnCollisionEnter2D(Collision2D collision)
@@ -15,6 +18,16 @@ public class Door : MonoBehaviour
             startPos = Player.Instance.transform.position;
             GetComponent<SpriteRenderer>().sprite = openDoor;
             fade = true;
+        }
+    }
+
+    private void OnCollisionStay2D(Collision2D collision)
+    {
+        if (timeFade >= 0.5f && summarySpawned == false)
+        {
+            Instantiate(levelFinishUI, canvas.transform);
+            summarySpawned = true;
+
         }
     }
 

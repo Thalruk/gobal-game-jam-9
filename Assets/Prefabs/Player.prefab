@@ -205,7 +205,7 @@ MonoBehaviour:
   isGrounded: 0
   mask:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 256
   activeBubble: 0
   ammo: 
   maxAmmo: 20
@@ -221,6 +221,8 @@ MonoBehaviour:
   - {fileID: 21300000, guid: 2547b25c15a8753439f7ff6f072ef098, type: 3}
   - {fileID: 21300000, guid: 5df19c54c871df346807d80a1885ef31, type: 3}
   - {fileID: 21300000, guid: e0237ebb0f75b40469f2eac0962f76ab, type: 3}
+  refillAmmoTime: 0
+  restDelay: 1
   heartHolder: {fileID: 0}
   heart: {fileID: 624116266207196298, guid: 281dc19a9ef460e4c90c98a0c52f3d9a, type: 3}
   startingHealth: 2
