@@ -18,6 +18,14 @@ public class LevelManager : MonoBehaviour
         Cursor.visible = false;
 
 
-        scoreMax = FindObjectsOfTypeAll(typeof(CollectiblePickUp)).Length;
+        Object[] orbs = Resources.FindObjectsOfTypeAll(typeof(CollectiblePickUp));
+
+        foreach (Object item in orbs)
+        {
+            if (((CollectiblePickUp)item).optional)
+            {
+
+            }
+        }
     }
 }
