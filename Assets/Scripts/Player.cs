@@ -16,6 +16,8 @@ public class Player : MonoBehaviour
     [SerializeField] int speed;
     [SerializeField] int jumpStrength;
     [SerializeField] public Vector2 direction = Vector2.right;
+    [SerializeField] GameObject jumpBubble;
+    bool spawnedBubble = false;
     [SerializeField] GameObject graphics;
     bool canMove = true;
     [Space]
@@ -99,10 +101,22 @@ public class Player : MonoBehaviour
 
         isGrounded = Physics2D.OverlapCircle(groundCheckTransform.transform.position, groundCheckRadius, mask);
 
+        if (isGrounded)
+        {
+            spawnedBubble = false;
+        }
 
         if (Input.GetKeyDown(KeyCode.Space) && isGrounded)
         {
             rb.velocity = new Vector2(rb.velocity.x, jumpStrength);
+        }
+
+        if (Input.GetKeyDown(KeyCode.Space) && !isGrounded && rb.velocity.y != 0 && !spawnedBubble)
+        {
+            GameObject jumpbubbleObject = Instantiate(jumpBubble, (Vector2)groundCheckTransform.transform.position + Vector2.down * 0.2f, Quaternion.identity);
+            rb.velocity = new Vector2(rb.velocity.x, jumpStrength * 0.5f);
+            spawnedBubble = true;
+            Destroy(jumpbubbleObject, 0.2f);
         }
 
 
