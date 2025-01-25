@@ -12,7 +12,8 @@ public class MainMenu : MonoBehaviour
 
     [Header("OPTIONS")]
     [SerializeField] TMP_Dropdown resolutionDropdown;
-    [SerializeField] TMP_Dropdown screenMode;
+    [SerializeField] TMP_Dropdown screenModeDropdown;
+    [SerializeField] TMP_Dropdown fpsDropdown;
 
     private void Awake()
     {
@@ -49,7 +50,7 @@ public class MainMenu : MonoBehaviour
         string[] values = resolutionDropdown.value.ToString().Split('x');
         FullScreenMode mode = Screen.fullScreenMode;
 
-        switch (screenMode.value.ToString())
+        switch (screenModeDropdown.value.ToString())
         {
             case "Fullscreen":
                 mode = FullScreenMode.FullScreenWindow;
@@ -66,11 +67,12 @@ public class MainMenu : MonoBehaviour
             default:
                 break;
         }
-        if (screenMode.value.ToString().Equals("Fullscreen"))
+        if (screenModeDropdown.value.ToString().Equals("Fullscreen"))
         {
             mode = FullScreenMode.FullScreenWindow;
         }
         Screen.SetResolution(int.Parse(values[0]), int.Parse(values[1]), mode);
+        Application.targetFrameRate = fpsDropdown.value;
     }
 
     public void Exit()

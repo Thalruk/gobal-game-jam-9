@@ -9,6 +9,9 @@ EditorBuildSettings:
     path: Assets/Scenes/MainMenu.unity
     guid: f6380e4bde7de37479a9684ebcad2839
   - enabled: 1
+    path: Assets/Scenes/OptionsMenu.unity
+    guid: d8d936525b137084dbef593388abe62a
+  - enabled: 1
     path: Assets/Scenes/Bartek.unity
     guid: e10503f2cdb4b774bb3f03845c486a64
   m_configObjects: {}

@@ -17672,12 +17672,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 27aab84ebb52e23448221f1eba00c429, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  normalCursor: {fileID: 0}
-  clickCursor: {fileID: 0}
-  cursorParticles: {fileID: 0}
+  normalCursor: {fileID: 2800000, guid: e8e844c2193f55241b23ee54de4587a2, type: 3}
+  clickCursor: {fileID: 2800000, guid: e8801a54ab781a846b293c364152bad4, type: 3}
+  cursorParticles: {fileID: 732484866}
   offset: {x: 0, y: 0}
-  resolutionDropdown: {fileID: 0}
-  screenMode: {fileID: 0}
+  resolutionDropdown: {fileID: 1601621587}
+  screenModeDropdown: {fileID: 1031634869}
+  fpsDropdown: {fileID: 306797844}
 --- !u!4 &777726348
 Transform:
   m_ObjectHideFlags: 0
