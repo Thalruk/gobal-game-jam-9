@@ -23,7 +23,8 @@ public class Player : MonoBehaviour
     [Space]
     [Header("Ammo")]
     [SerializeField] int activeBubble = 0;
-    [SerializeField] int ammo = 10;
+    [SerializeField] public int ammo = 0;
+    [SerializeField] int maxAmmo = 10;
     [SerializeField] Slider ammoSlider;
     bool canShoot = true;
     [SerializeField] float chargedAmount = 0f;
@@ -46,7 +47,8 @@ public class Player : MonoBehaviour
 
         rb = GetComponent<Rigidbody2D>();
         ChangeHealth(startingHealth);
-        ammoSlider.maxValue = ammo;
+        ChangeAmmo(maxAmmo);
+        ammoSlider.maxValue = maxAmmo;
 
     }
 
@@ -72,6 +74,22 @@ public class Player : MonoBehaviour
         }
 
 
+        if (Input.GetAxis("Mouse ScrollWheel") > 0f) // forward
+        {
+            activeBubble = (activeBubble + 1) % 4;
+            print("Active bubble: " + activeBubble);
+        }
+        else if (Input.GetAxis("Mouse ScrollWheel") < 0f) // backwards
+        {
+            activeBubble = activeBubble - 1 < 0 ? 3 : activeBubble - 1;
+            print("Active bubble: " + activeBubble);
+        }
+
+        if (Input.GetMouseButtonDown(0) && ammo > 0)
+        {
+            canShoot = true;
+        }
+
         if (Input.GetMouseButton(0) && canShoot)
         {
             chargedAmount = Mathf.Clamp(chargedAmount + Time.deltaTime, 0, 1);
@@ -92,25 +110,14 @@ public class Player : MonoBehaviour
                 bubbleRigidbody2D.velocity += (Vector2.right * horizontal);
 
                 bubble.Init();
-                ammo -= bubble.ammoCost;
-                ammoSlider.value = ammo;
-                print(bubble.ammoCost);
+                ChangeAmmo(-bubble.ammoCost);
                 if (ammo <= 0)
                 {
                     canShoot = false;
                 }
             }
         }
-        if (Input.GetAxis("Mouse ScrollWheel") > 0f) // forward
-        {
-            activeBubble = (activeBubble + 1) % 4;
-            print("Active bubble: " + activeBubble);
-        }
-        else if (Input.GetAxis("Mouse ScrollWheel") < 0f) // backwards
-        {
-            activeBubble = activeBubble - 1 < 0 ? 3 : activeBubble - 1;
-            print("Active bubble: " + activeBubble);
-        }
+
     }
 
     private void FixedUpdate()
@@ -144,6 +151,13 @@ public class Player : MonoBehaviour
                 Instantiate(heart, heartHolder.transform);
             }
         }
+    }
+
+
+    public void ChangeAmmo(int value)
+    {
+        ammo = Mathf.Clamp(ammo + value, 0, maxAmmo);
+        ammoSlider.value = ammo;
     }
 
     public void CheckHealth()

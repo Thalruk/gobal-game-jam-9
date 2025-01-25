@@ -1,13 +1,14 @@
 using UnityEngine;
 
-public class HeartPickup : PickUpBase
+public class AmmoPickUp : PickUpBase
 {
+    [SerializeField] int ammoAmount;
     float x = 0;
-
     public override void PickUp()
     {
-        Player.Instance.ChangeHealth(1);
+        Player.Instance.ChangeAmmo(ammoAmount);
     }
+
 
     void Update()
     {
