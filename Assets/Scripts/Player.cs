@@ -29,10 +29,7 @@ public class Player : MonoBehaviour
     [SerializeField] int maxAmmo = 32;
     [SerializeField] Slider ammoSlider;
     bool canShoot = true;
-    [SerializeField] float chargedAmount = 0f;
-    [SerializeField] Slider chargeSlider;
     [SerializeField] GameObject[] bubbles;
-    public bool boostAttack = false;
     [SerializeField] Image ammoFillImage;
     [SerializeField] Sprite[] ammoFillImages;
 
@@ -110,11 +107,6 @@ public class Player : MonoBehaviour
             canShoot = true;
         }
 
-        if (Input.GetMouseButton(0) && canShoot)
-        {
-            chargedAmount = Mathf.Clamp(chargedAmount + Time.deltaTime, 0, 1);
-            chargeSlider.value = chargedAmount;
-        }
         if (Input.GetMouseButtonUp(0) && canShoot)
         {
             Vector2 pos = (Vector2)transform.position - new Vector2(0f, 0.7f);
@@ -124,15 +116,9 @@ public class Player : MonoBehaviour
             {
                 Rigidbody2D bubbleRigidbody2D = bubbleObject.GetComponent<Rigidbody2D>();
 
-                bubble.charged = (chargedAmount >= 1f);
-
-                chargedAmount = 0;
-                chargeSlider.value = chargedAmount;
                 bubbleRigidbody2D.velocity = (direction.x < 0f) ? Vector2.left : Vector2.right;
                 bubbleRigidbody2D.velocity += (Vector2.right * horizontal);
                 bubble.vel = bubbleRigidbody2D.velocity;
-                bubble.boostAttack = boostAttack;
-                boostAttack = false;
                 bubble.Init();
                 ChangeAmmo(activeBubble, -bubble.ammoCost);
                 if (ammo[activeBubble] <= 0)
