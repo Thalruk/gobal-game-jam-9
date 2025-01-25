@@ -77,7 +77,7 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_Sprite: {fileID: 21300000, guid: 96b117e3912b2d04d8ed7001f52f20de, type: 3}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 0.5422418, g: 0.98742133, b: 0.027945718, a: 0.32156864}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -161,5 +161,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 521fa9d25dcb5a148bc0f0cfc582cf9e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  ammoCost: 0
   charged: 0
   glassSpikesPrefab: {fileID: 3704999075114566475, guid: 3dd27e73c9a73ac4cbc3e88f057cd1a0, type: 3}

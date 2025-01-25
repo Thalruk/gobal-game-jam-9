@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: -133967341185594226}
   - component: {fileID: 4457384554056535594}
   m_Layer: 6
-  m_Name: szklanykolec
+  m_Name: GlassSpike
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

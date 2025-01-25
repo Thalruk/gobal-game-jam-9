@@ -1,7 +1,6 @@
-using UnityEditor.Experimental.GraphView;
 using UnityEngine;
 
-public class PlayerMovement : MonoBehaviour
+public class Player : MonoBehaviour
 {
     float horizontal;
 
@@ -15,9 +14,10 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] Transform groundCheckTransform;
     [SerializeField] float groundCheckRadius = 0.2f;
     [SerializeField] bool isGrounded = false;
+    [SerializeField] LayerMask mask;
 
-    int activeBubble = 0;
-    int ammo = 10;
+    [SerializeField] int activeBubble = 0;
+    [SerializeField] int ammo = 10;
     bool canShoot = true;
     float chargedAmmount = 0f;
     [SerializeField] GameObject[] bubbles;
@@ -25,8 +25,8 @@ public class PlayerMovement : MonoBehaviour
     private void Awake()
     {
         rb = GetComponent<Rigidbody2D>();
-        Physics2D.IgnoreLayerCollision(10, 6);
-        Physics2D.IgnoreLayerCollision(10, 9);
+        //Physics2D.IgnoreLayerCollision(10, 6);
+        //Physics2D.IgnoreLayerCollision(10, 9);
     }
 
     private void Update()
@@ -43,35 +43,38 @@ public class PlayerMovement : MonoBehaviour
             graphics.GetComponent<SpriteRenderer>().flipX = true;
         }
 
-        isGrounded = Physics2D.OverlapCircle(groundCheckTransform.transform.position, groundCheckRadius);
+        isGrounded = Physics2D.OverlapCircle(groundCheckTransform.transform.position, groundCheckRadius, mask);
 
         if (Input.GetKeyDown(KeyCode.Space) && isGrounded)
         {
             rb.velocity = new Vector2(rb.velocity.x, jumpStrength);
         }
-        if (Input.GetKeyUp(KeyCode.Space) && rb.velocity.y > 0)
-        {
-            rb.velocity = new Vector2(rb.velocity.x, jumpStrength * 0.5f);
-        }
+
+
         if (Input.GetMouseButton(0) && canShoot)
         {
-            chargedAmmount += Time.deltaTime;
-            print(chargedAmmount);
+            chargedAmmount = Mathf.Clamp(chargedAmmount + Time.deltaTime, 0, 1);
         }
-        if(Input.GetMouseButtonUp(0) && canShoot)
+        if (Input.GetMouseButtonUp(0) && canShoot)
         {
-            GameObject bubble = Instantiate(bubbles[activeBubble], transform.position, Quaternion.identity);
-            bubble.GetComponent<Bubble>().charged = (chargedAmmount > 1f);
-            chargedAmmount = 0;
-            bubble.GetComponent<Rigidbody2D>().velocity = (direction.x < 0f) ? Vector2.left : Vector2.right;
-            
-            bubble.GetComponent<Rigidbody2D>().velocity += (Vector2.right * horizontal);
-            bubble.GetComponent<Bubble>().Init();
-            ammo -= bubble.GetComponent<Bubble>().ammoCost;
-            print(bubble.GetComponent<Bubble>().ammoCost);
-            if(ammo <= 0)
+            GameObject bubbleObject = Instantiate(bubbles[activeBubble], transform.position, Quaternion.identity);
+            Bubble bubble = bubbleObject.GetComponent<Bubble>();
+            if (ammo >= bubble.ammoCost)
             {
-                canShoot = false;
+                Rigidbody2D bubbleRigidbody2D = bubbleObject.GetComponent<Rigidbody2D>();
+
+                bubble.charged = (chargedAmmount >= 1f);
+                chargedAmmount = 0;
+                bubbleRigidbody2D.velocity = (direction.x < 0f) ? Vector2.left : Vector2.right;
+                bubbleRigidbody2D.velocity += (Vector2.right * horizontal);
+
+                bubble.Init();
+                ammo -= bubble.ammoCost;
+                print(bubble.ammoCost);
+                if (ammo <= 0)
+                {
+                    canShoot = false;
+                }
             }
         }
         if (Input.GetAxis("Mouse ScrollWheel") > 0f) // forward
@@ -89,10 +92,5 @@ public class PlayerMovement : MonoBehaviour
     private void FixedUpdate()
     {
         rb.velocity = new Vector2(horizontal * speed, rb.velocity.y);
-    }
-
-    private void OnDrawGizmosSelected()
-    {
-        Gizmos.DrawWireSphere(groundCheckTransform.transform.position, groundCheckRadius);
     }
 }
