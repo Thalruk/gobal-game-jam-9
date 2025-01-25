@@ -135,7 +135,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 10
   m_Sprite: {fileID: 21300000, guid: 1c2a64470cb47bc43aab427a39ec1bbe, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -215,7 +215,6 @@ MonoBehaviour:
   - {fileID: 5072556952952347031, guid: 4fccf35b50d6f134faa84291e52265ff, type: 3}
   - {fileID: 5072556952952347031, guid: 958a6787ba4a21744901809fef72434e, type: 3}
   - {fileID: 5072556952952347031, guid: d3158b3c54301fb459e4deec563b57a5, type: 3}
-  boostAttack: 0
   ammoFillImage: {fileID: 0}
   ammoFillImages:
   - {fileID: 21300000, guid: b55168d0ea0086f43a644fb6c4c74bcc, type: 3}

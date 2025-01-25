@@ -4,7 +4,9 @@ public class LevelManager : MonoBehaviour
 {
     public static LevelManager Instance;
     [SerializeField] public int score;
-    [SerializeField] int scoreMax;
+    [SerializeField] public int scoreOptional;
+    [SerializeField] public int scoreMax;
+    [SerializeField] public int scoreMaxOptional;
 
     private void Awake()
     {
@@ -17,7 +19,6 @@ public class LevelManager : MonoBehaviour
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
 
-
         Object[] orbs = Resources.FindObjectsOfTypeAll(typeof(CollectiblePickUp));
 
         foreach (Object item in orbs)
@@ -25,6 +26,10 @@ public class LevelManager : MonoBehaviour
             if (((CollectiblePickUp)item).optional == false)
             {
                 scoreMax++;
+            }
+            else
+            {
+                scoreMaxOptional++;
             }
         }
     }
