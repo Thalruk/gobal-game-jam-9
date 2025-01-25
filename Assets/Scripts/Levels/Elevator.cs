@@ -24,4 +24,10 @@ public class Elevator : MonoBehaviour
             elevatorObject.transform.position = from.position;
         }
     }
+
+    private void OnDrawGizmosSelected()
+    {
+        Gizmos.DrawWireSphere(from.position, 0.5f);
+        Gizmos.DrawWireSphere(to.position, 0.5f);
+    }
 }
