@@ -8,12 +8,16 @@ public class MainMenu : MonoBehaviour
     [SerializeField] Texture2D clickCursor;
 
     [SerializeField] ParticleSystem cursorParticles;
+    [SerializeField] AudioSource cursorAudioSource;
     [SerializeField] Vector2 offset;
 
     [Header("OPTIONS")]
     [SerializeField] TMP_Dropdown resolutionDropdown;
     [SerializeField] TMP_Dropdown screenModeDropdown;
     [SerializeField] TMP_Dropdown fpsDropdown;
+
+    [Header("SOUND")]
+    [SerializeField] TMP_Dropdown durationDropdown;
 
     private void Awake()
     {
@@ -25,6 +29,7 @@ public class MainMenu : MonoBehaviour
         {
             Cursor.SetCursor(clickCursor, Vector2.zero, CursorMode.ForceSoftware);
             cursorParticles.Play();
+            cursorAudioSource.Play();
         }
         if (Input.GetMouseButton(0))
         {
@@ -35,6 +40,7 @@ public class MainMenu : MonoBehaviour
         {
             Cursor.SetCursor(normalCursor, Vector2.zero, CursorMode.ForceSoftware);
             cursorParticles.Stop();
+            cursorAudioSource.Stop();
         }
     }
     public void LoadLevel(int index)
