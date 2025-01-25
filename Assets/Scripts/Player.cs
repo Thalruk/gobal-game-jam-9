@@ -25,8 +25,8 @@ public class Player : MonoBehaviour
     [Space]
     [Header("Ammo")]
     [SerializeField] int activeBubble = 0;
-    [SerializeField] public int ammo = 0;
-    [SerializeField] int maxAmmo = 10;
+    [SerializeField] public int[] ammo;
+    [SerializeField] int maxAmmo = 32;
     [SerializeField] Slider ammoSlider;
     bool canShoot = true;
     [SerializeField] float chargedAmount = 0f;
@@ -52,6 +52,7 @@ public class Player : MonoBehaviour
     [SerializeField] bool invincible = false;
     private void Awake()
     {
+        ammo = new int[4] { 0, 0, 0, 0 };
         if (Instance != null && Instance != this)
         {
             Destroy(Instance);
@@ -61,7 +62,7 @@ public class Player : MonoBehaviour
 
         rb = GetComponent<Rigidbody2D>();
         ChangeHealth(startingHealth);
-        ChangeAmmo(maxAmmo);
+        ChangeAmmo(0, maxAmmo);
         //ammoSlider.maxValue = maxAmmo;
         //ammoFillImage.sprite = ammoFillImages[activeBubble];
 
@@ -104,7 +105,7 @@ public class Player : MonoBehaviour
             ammoFillImage.sprite = ammoFillImages[activeBubble];
         }
 
-        if (Input.GetMouseButtonDown(0) && ammo > 0 && !isShield)
+        if (Input.GetMouseButtonDown(0) && ammo[activeBubble] > 0 && !isShield)
         {
             canShoot = true;
         }
@@ -119,7 +120,7 @@ public class Player : MonoBehaviour
             Vector2 pos = (Vector2)transform.position - new Vector2(0f, 0.7f);
             GameObject bubbleObject = Instantiate(bubbles[activeBubble], pos, Quaternion.identity);
             Bubble bubble = bubbleObject.GetComponent<Bubble>();
-            if (ammo >= bubble.ammoCost)
+            if (ammo[activeBubble] >= bubble.ammoCost)
             {
                 Rigidbody2D bubbleRigidbody2D = bubbleObject.GetComponent<Rigidbody2D>();
 
@@ -133,8 +134,8 @@ public class Player : MonoBehaviour
                 bubble.boostAttack = boostAttack;
                 boostAttack = false;
                 bubble.Init();
-                ChangeAmmo(-bubble.ammoCost);
-                if (ammo <= 0)
+                ChangeAmmo(activeBubble, -bubble.ammoCost);
+                if (ammo[activeBubble] <= 0)
                 {
                     canShoot = false;
                 }
@@ -214,9 +215,9 @@ public class Player : MonoBehaviour
     }
 
 
-    public void ChangeAmmo(int value)
+    public void ChangeAmmo(int type, int value)
     {
-        ammo = Mathf.Clamp(ammo + value, 0, maxAmmo);
+        ammo[type] = Mathf.Clamp(ammo[type] + value, 0, maxAmmo);
         //ammoSlider.value = ammo;
     }
 

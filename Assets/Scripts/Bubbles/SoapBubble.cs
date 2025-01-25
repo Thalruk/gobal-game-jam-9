@@ -59,7 +59,7 @@ public class SoapBubble : Bubble
     {
         base.ShieldParry(spike);
         //Player.Instance.ammo = Mathf.Clamp(Player.Instance.ammo + 5, 0, 10);
-        Player.Instance.ChangeAmmo(5);
+        Player.Instance.ChangeAmmo(0, 5);
     }
 
     private void Start()
