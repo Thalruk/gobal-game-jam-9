@@ -31,6 +31,7 @@ public class GlassBubble : Bubble
     }
     protected override void ChargedAttack(GameObject enemy)
     {
+        base.ChargedAttack(enemy);
         enemy.GetComponent<Enemy>().GetDamage(damage);
         Explode();
 

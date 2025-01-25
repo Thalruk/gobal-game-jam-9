@@ -130,9 +130,10 @@ public class Enemy : MonoBehaviour
     public void FlyAway()
     {
         timeFly = 0f;
-        pushVector.y += 10f;
+        pushVector.y += 100f;
 
         fly = true;
+        hitted = true;
         rb.AddForce(new Vector2(0f, pushVector.y));
 
     }

@@ -33,6 +33,8 @@ public class Player : MonoBehaviour
     [SerializeField] Slider chargeSlider;
     [SerializeField] GameObject[] bubbles;
     public bool boostAttack = false;
+    [SerializeField] Image ammoFillImage;
+    [SerializeField] Sprite[] ammoFillImages;
     
     Bubble bubbleShield;
     GameObject bubbleShieldObj;
@@ -60,7 +62,9 @@ public class Player : MonoBehaviour
         rb = GetComponent<Rigidbody2D>();
         ChangeHealth(startingHealth);
         ChangeAmmo(maxAmmo);
-        //ammoSlider.maxValue = maxAmmo;
+        ammoSlider.maxValue = maxAmmo;
+        ammoFillImage.sprite = ammoFillImages[activeBubble];
+
 
     }
 
@@ -91,11 +95,13 @@ public class Player : MonoBehaviour
         {
             activeBubble = (activeBubble + 1) % 4;
             print("Active bubble: " + activeBubble);
+            ammoFillImage.sprite = ammoFillImages[activeBubble];
         }
         else if (Input.GetAxis("Mouse ScrollWheel") < 0f) // backwards
         {
             activeBubble = activeBubble - 1 < 0 ? 3 : activeBubble - 1;
             print("Active bubble: " + activeBubble);
+            ammoFillImage.sprite = ammoFillImages[activeBubble];
         }
 
         if (Input.GetMouseButtonDown(0) && ammo > 0 && !isShield)
@@ -118,6 +124,7 @@ public class Player : MonoBehaviour
                 Rigidbody2D bubbleRigidbody2D = bubbleObject.GetComponent<Rigidbody2D>();
 
                 bubble.charged = (chargedAmount >= 1f);
+         
                 chargedAmount = 0;
                 chargeSlider.value = chargedAmount;
                 bubbleRigidbody2D.velocity = (direction.x < 0f) ? Vector2.left : Vector2.right;
@@ -210,7 +217,7 @@ public class Player : MonoBehaviour
     public void ChangeAmmo(int value)
     {
         ammo = Mathf.Clamp(ammo + value, 0, maxAmmo);
-        //ammoSlider.value = ammo;
+        ammoSlider.value = ammo;
     }
 
     public void CheckHealth()

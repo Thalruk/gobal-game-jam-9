@@ -28,6 +28,7 @@ public class SoapBubble : Bubble
     }
     protected override void ChargedAttack(GameObject enemy)
     {
+        base.ChargedAttack(enemy);
         enemy.GetComponent<Rigidbody2D>().velocity = Vector2.zero;
         enemy.GetComponent<Enemy>().GetDamage(damage);
         enemy.GetComponent<Enemy>().FlyAway();
@@ -57,7 +58,8 @@ public class SoapBubble : Bubble
     protected override void ShieldParry(GameObject spike)
     {
         base.ShieldParry(spike);
-        Player.Instance.ammo = Mathf.Clamp(Player.Instance.ammo + 5, 0, 10);
+        //Player.Instance.ammo = Mathf.Clamp(Player.Instance.ammo + 5, 0, 10);
+        Player.Instance.ChangeAmmo(5);
     }
 
     private void Start()

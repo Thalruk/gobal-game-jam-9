@@ -29,6 +29,7 @@ public class StoneBubble : Bubble
     }
     protected override void ChargedAttack(GameObject enemy)
     {
+        base.ChargedAttack(enemy);
         enemy.GetComponent<Enemy>().GetDamage(damage);
         enemy.GetComponent<Enemy>().PushBack(GetComponent<Rigidbody2D>().velocity);
 

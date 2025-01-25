@@ -29,6 +29,7 @@ public class LavaBubble : Bubble{
     }
     protected override void ChargedAttack(GameObject enemy)
     {
+        base.ChargedAttack(enemy);
         enemy.GetComponent<Enemy>().GetDamage(damage);
         SpillOnFloor();
 

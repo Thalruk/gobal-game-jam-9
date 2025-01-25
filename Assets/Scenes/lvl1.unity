@@ -6050,8 +6050,12 @@ PrefabInstance:
       value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 334901266815404935, guid: 43ee26d8c3cd39f43864c83ffb4301f1, type: 3}
+      propertyPath: ammoFillImage
+      value: 
+      objectReference: {fileID: 2070703800}
+    - target: {fileID: 334901266815404935, guid: 43ee26d8c3cd39f43864c83ffb4301f1, type: 3}
       propertyPath: chargedAmount
-      value: 10
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 334901266815404935, guid: 43ee26d8c3cd39f43864c83ffb4301f1, type: 3}
       propertyPath: startingHealth
@@ -6077,6 +6081,26 @@ PrefabInstance:
       propertyPath: bubbles.Array.data[3]
       value: 
       objectReference: {fileID: 5072556952952347031, guid: d3158b3c54301fb459e4deec563b57a5, type: 3}
+    - target: {fileID: 334901266815404935, guid: 43ee26d8c3cd39f43864c83ffb4301f1, type: 3}
+      propertyPath: ammoFillImages.Array.size
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 334901266815404935, guid: 43ee26d8c3cd39f43864c83ffb4301f1, type: 3}
+      propertyPath: ammoFillImages.Array.data[0]
+      value: 
+      objectReference: {fileID: 21300000, guid: b55168d0ea0086f43a644fb6c4c74bcc, type: 3}
+    - target: {fileID: 334901266815404935, guid: 43ee26d8c3cd39f43864c83ffb4301f1, type: 3}
+      propertyPath: ammoFillImages.Array.data[1]
+      value: 
+      objectReference: {fileID: 21300000, guid: 52045d722478e544d8ed7ab599f9087a, type: 3}
+    - target: {fileID: 334901266815404935, guid: 43ee26d8c3cd39f43864c83ffb4301f1, type: 3}
+      propertyPath: ammoFillImages.Array.data[2]
+      value: 
+      objectReference: {fileID: 21300000, guid: 5df19c54c871df346807d80a1885ef31, type: 3}
+    - target: {fileID: 334901266815404935, guid: 43ee26d8c3cd39f43864c83ffb4301f1, type: 3}
+      propertyPath: ammoFillImages.Array.data[3]
+      value: 
+      objectReference: {fileID: 21300000, guid: e0237ebb0f75b40469f2eac0962f76ab, type: 3}
     - target: {fileID: 1004317462126581971, guid: 43ee26d8c3cd39f43864c83ffb4301f1, type: 3}
       propertyPath: m_SizeDelta.x
       value: 3
