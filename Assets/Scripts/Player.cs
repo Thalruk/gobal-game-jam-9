@@ -2,6 +2,8 @@ using UnityEngine;
 
 public class Player : MonoBehaviour
 {
+
+    public static Player Instance;
     float horizontal;
 
     Rigidbody2D rb;
@@ -10,23 +12,40 @@ public class Player : MonoBehaviour
     [SerializeField] int jumpStrength;
     [SerializeField] Vector2 direction = Vector2.right;
     [SerializeField] GameObject graphics;
-
+    [Space]
+    [Header("GroundCheck")]
     [SerializeField] Transform groundCheckTransform;
     [SerializeField] float groundCheckRadius = 0.2f;
     [SerializeField] bool isGrounded = false;
     [SerializeField] LayerMask mask;
-
+    [Space]
+    [Header("Ammo")]
     [SerializeField] int activeBubble = 0;
     [SerializeField] int ammo = 10;
     bool canShoot = true;
     float chargedAmmount = 0f;
     [SerializeField] GameObject[] bubbles;
-
+    [Space]
+    [Header("Health")]
+    [SerializeField] GameObject heartHolder;
+    [SerializeField] GameObject heart;
+    [SerializeField] int startingHealth;
+    [SerializeField] public int currentHealth;
     private void Awake()
     {
+        if (Instance != null && Instance != this)
+        {
+            Destroy(Instance);
+        }
+        Instance = this;
+
         rb = GetComponent<Rigidbody2D>();
-        //Physics2D.IgnoreLayerCollision(10, 6);
-        //Physics2D.IgnoreLayerCollision(10, 9);
+        ChangeHealth(startingHealth);
+
+        for (int i = 0; i < currentHealth; i++)
+        {
+            Instantiate(heart, heartHolder.transform);
+        }
     }
 
     private void Update()
@@ -92,5 +111,15 @@ public class Player : MonoBehaviour
     private void FixedUpdate()
     {
         rb.velocity = new Vector2(horizontal * speed, rb.velocity.y);
+    }
+
+    public void ChangeHealth(int value)
+    {
+        currentHealth += value;
+
+        if (currentHealth == 0)
+        {
+            Destroy(gameObject);
+        }
     }
 }
