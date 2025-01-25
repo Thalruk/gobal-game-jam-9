@@ -153,7 +153,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   vidPlayer: {fileID: 1777131339}
   text: {fileID: 386709235}
-  nextSceneName: Bartek
+  nextSceneName: SceneSelection
 --- !u!4 &146497256
 Transform:
   m_ObjectHideFlags: 0
