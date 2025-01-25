@@ -71,7 +71,14 @@ public abstract class Bubble : MonoBehaviour
                 }
 
             }
+         
         }
+
+        if(collision.gameObject.tag == "Shield")
+        {
+            Destroy(gameObject);
+        }
+        Destroy(gameObject);
     }
 
     protected virtual void ChargedAttack(GameObject enemy) { }
