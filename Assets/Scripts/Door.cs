@@ -4,7 +4,6 @@ public class Door : MonoBehaviour
 {
     [SerializeField] Sprite openDoor;
 
-    Player player;
     bool fade = false;
     float timeFade = 0f;
     Vector2 startPos;
