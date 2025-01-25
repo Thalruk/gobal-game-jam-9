@@ -3,7 +3,7 @@ using UnityEngine;
 public class LavaBubble : Bubble
 {
 
-    [SerializeField] protected GameObject lavaSpillPrefab;
+    [SerializeField] public GameObject lavaSpillPrefab;
     public override void Init()
     {
         type = 3;
