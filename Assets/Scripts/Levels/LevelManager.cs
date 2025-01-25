@@ -22,9 +22,9 @@ public class LevelManager : MonoBehaviour
 
         foreach (Object item in orbs)
         {
-            if (((CollectiblePickUp)item).optional)
+            if (((CollectiblePickUp)item).optional == false)
             {
-
+                scoreMax++;
             }
         }
     }

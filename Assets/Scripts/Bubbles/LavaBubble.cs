@@ -1,8 +1,7 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
-public class LavaBubble : Bubble{
+public class LavaBubble : Bubble
+{
 
     [SerializeField] protected GameObject lavaSpillPrefab;
     public override void Init()
@@ -44,7 +43,6 @@ public class LavaBubble : Bubble{
     protected override void ShieldParry(GameObject spike)
     {
         base.ShieldParry(spike);
-        Player.Instance.boostAttack = true;
     }
 
     private void Start()
