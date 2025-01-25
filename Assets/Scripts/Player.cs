@@ -10,10 +10,12 @@ public class Player : MonoBehaviour
 
     Rigidbody2D rb;
 
+    [SerializeField] int speedDefault;
     [SerializeField] int speed;
     [SerializeField] int jumpStrength;
     [SerializeField] Vector2 direction = Vector2.right;
     [SerializeField] GameObject graphics;
+    bool canMove = true;
     [Space]
     [Header("GroundCheck")]
     [SerializeField] Transform groundCheckTransform;
@@ -30,6 +32,13 @@ public class Player : MonoBehaviour
     [SerializeField] float chargedAmount = 0f;
     [SerializeField] Slider chargeSlider;
     [SerializeField] GameObject[] bubbles;
+    public bool boostAttack = false;
+    
+    Bubble bubbleShield;
+    GameObject bubbleShieldObj;
+    bool isShield;
+    float shieldCooldown = 0f;
+
     [Space]
     [Header("Health")]
     [SerializeField] GameObject heartHolder;
@@ -44,23 +53,24 @@ public class Player : MonoBehaviour
             Destroy(Instance);
         }
         Instance = this;
+        speed = speedDefault;
 
         rb = GetComponent<Rigidbody2D>();
         ChangeHealth(startingHealth);
         ChangeAmmo(maxAmmo);
-        ammoSlider.maxValue = maxAmmo;
+        //ammoSlider.maxValue = maxAmmo;
 
     }
 
     private void Update()
     {
         horizontal = Input.GetAxisRaw("Horizontal");
-        if (horizontal == 1)
+        if (horizontal == 1 && canMove)
         {
             direction = Vector2.right;
             graphics.GetComponent<SpriteRenderer>().flipX = false;
         }
-        else if (horizontal == -1)
+        else if (horizontal == -1 && canMove)
         {
             direction = Vector2.left;
             graphics.GetComponent<SpriteRenderer>().flipX = true;
@@ -85,7 +95,7 @@ public class Player : MonoBehaviour
             print("Active bubble: " + activeBubble);
         }
 
-        if (Input.GetMouseButtonDown(0) && ammo > 0)
+        if (Input.GetMouseButtonDown(0) && ammo > 0 && !isShield)
         {
             canShoot = true;
         }
@@ -97,7 +107,8 @@ public class Player : MonoBehaviour
         }
         if (Input.GetMouseButtonUp(0) && canShoot)
         {
-            GameObject bubbleObject = Instantiate(bubbles[activeBubble], transform.position, Quaternion.identity);
+            Vector2 pos = (Vector2)transform.position - new Vector2(0f, 0.7f);
+            GameObject bubbleObject = Instantiate(bubbles[activeBubble], pos, Quaternion.identity);
             Bubble bubble = bubbleObject.GetComponent<Bubble>();
             if (ammo >= bubble.ammoCost)
             {
@@ -108,7 +119,9 @@ public class Player : MonoBehaviour
                 chargeSlider.value = chargedAmount;
                 bubbleRigidbody2D.velocity = (direction.x < 0f) ? Vector2.left : Vector2.right;
                 bubbleRigidbody2D.velocity += (Vector2.right * horizontal);
-
+                bubble.vel = bubbleRigidbody2D.velocity;
+                bubble.boostAttack = boostAttack;
+                boostAttack = false;
                 bubble.Init();
                 ChangeAmmo(-bubble.ammoCost);
                 if (ammo <= 0)
@@ -117,12 +130,29 @@ public class Player : MonoBehaviour
                 }
             }
         }
-
+        if (Input.GetKey(KeyCode.Q) && !isShield && shieldCooldown == 0f) {
+            bubbleShieldObj = Instantiate(bubbles[activeBubble], transform.position, Quaternion.identity);
+            Destroy(bubbleShieldObj.GetComponent<Rigidbody2D>());
+            bubbleShield = bubbleShieldObj.GetComponent<Bubble>();
+            bubbleShield.Init();
+            bubbleShield.Shield();
+            isShield = true;
+            canShoot = false;
+            canMove = false;
+            speed = 0;
+        }
+        if (Input.GetKeyUp(KeyCode.Q) && isShield) {
+            RemoveShield();
+        }
+        print(shieldCooldown);
+        shieldCooldown = Mathf.Clamp(shieldCooldown - Time.deltaTime, 0f, 3f);
     }
 
     private void FixedUpdate()
     {
+    
         rb.velocity = new Vector2(horizontal * speed, rb.velocity.y);
+ 
     }
 
     private void OnCollisionEnter2D(Collision2D collision)
@@ -157,7 +187,7 @@ public class Player : MonoBehaviour
     public void ChangeAmmo(int value)
     {
         ammo = Mathf.Clamp(ammo + value, 0, maxAmmo);
-        ammoSlider.value = ammo;
+        //ammoSlider.value = ammo;
     }
 
     public void CheckHealth()
@@ -171,5 +201,16 @@ public class Player : MonoBehaviour
     private void TurnOffInvicibility()
     {
         invincible = false;
+    }
+
+    public void RemoveShield()
+    {
+        bubbleShield.isShield = false;
+        Destroy(bubbleShieldObj);
+        isShield = false;
+        canShoot = true;
+        canMove = true;
+        speed = speedDefault;
+        shieldCooldown = 3f;
     }
 }

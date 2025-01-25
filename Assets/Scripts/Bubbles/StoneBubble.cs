@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class StoneBubble : Bubble
 {
+    [SerializeField] GameObject stoneParryPrefab;
     public override void Init()
     {
         type = 1;
@@ -46,6 +47,14 @@ public class StoneBubble : Bubble
         {
             Destroy(gameObject);
         }
+    }
+
+    protected override void ShieldParry(GameObject spike)
+    {
+        base.ShieldParry(spike);
+        GameObject stoneParry = Instantiate(stoneParryPrefab, transform.position, Quaternion.identity);
+        stoneParry.transform.localScale = transform.localScale;
+
     }
 
     private void Start()

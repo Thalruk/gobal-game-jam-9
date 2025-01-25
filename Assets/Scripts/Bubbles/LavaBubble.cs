@@ -40,6 +40,12 @@ public class LavaBubble : Bubble{
         GameObject lavaSpill = Instantiate(lavaSpillPrefab, transform.position, Quaternion.identity);
     }
 
+    protected override void ShieldParry(GameObject spike)
+    {
+        base.ShieldParry(spike);
+        Player.Instance.boostAttack = true;
+    }
+
     private void Start()
     {
     }

@@ -53,6 +53,12 @@ public class SoapBubble : Bubble
         }
     }
 
+    protected override void ShieldParry(GameObject spike)
+    {
+        base.ShieldParry(spike);
+        Player.Instance.ammo = Mathf.Clamp(Player.Instance.ammo + 5, 0, 10);
+    }
+
     private void Start()
     {
        

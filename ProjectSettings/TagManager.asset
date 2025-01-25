@@ -8,6 +8,9 @@ TagManager:
   - Ground
   - enemy
   - trap
+  - Bubble
+  - Shield
+  - Spike
   layers:
   - Default
   - TransparentFX

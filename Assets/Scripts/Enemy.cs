@@ -1,8 +1,15 @@
+using Unity.VisualScripting;
+using UnityEditor.Experimental.GraphView;
 using UnityEngine;
 
 public class Enemy : MonoBehaviour
 {
+    [SerializeField] GameObject spikePrefab;
     bool fly = false, pushBack = false;
+    public int damage = 1;
+    public int hp = 10;
+    bool canShoot = true;
+    float shootDelay = 3f;
     float timeFly = 0f, timePush = 0f;
     Vector2 startPosition, endPosition, pushVector;
     Rigidbody2D rb;
@@ -41,6 +48,27 @@ public class Enemy : MonoBehaviour
                 pushVector.x = 0f;
             }
         }
+
+        if(Vector2.Distance(Player.Instance.transform.position, transform.position) < 10f)
+        {
+            Shoot();
+        }
+        else
+        {
+            Patrol();
+        }
+    }
+
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        if(collision.gameObject.tag == "Bubble")
+        {
+            hp -= collision.gameObject.GetComponent<Bubble>().damage;
+            if(hp <= 0f)
+            {
+                Destroy(gameObject);
+            }
+        }
     }
 
     public void GetDamage(int damage) { }
@@ -65,5 +93,34 @@ public class Enemy : MonoBehaviour
 
         pushBack = true;
         //print(pushVector);
+    }
+
+    private void Patrol()
+    {
+
+    }
+
+    private void Shoot()
+    {
+        if (canShoot)
+        {
+            canShoot = false;
+            shootDelay = 3f;
+            float direction = Player.Instance.transform.position.x - transform.position.x;
+            direction = direction < 0f ? -1f : 1f;
+            GameObject spikeObject = Instantiate(spikePrefab, transform.position, Quaternion.identity);
+            spikeObject.transform.rotation = Quaternion.Euler(0f, 0f, -90f * direction);
+            spikeObject.GetComponent<Spike>().vel = Vector2.right * direction * 5;
+            //spikeObject.GetComponent<Rigidbody2D>().velocity = Vector2.right * direction * 5;
+        }
+        else if(shootDelay > 0f)
+        {
+            shootDelay -= Time.deltaTime;
+        }
+        else
+        {
+            shootDelay = 0f;
+            canShoot = true;
+        }
     }
 }

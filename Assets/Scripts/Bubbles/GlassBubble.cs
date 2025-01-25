@@ -47,6 +47,18 @@ public class GlassBubble : Bubble
         }
     }
 
+    protected override void ShieldParry(GameObject spike)
+    {
+        base.ShieldParry(spike);
+        Vector2 pos = (Vector2)transform.position - new Vector2(0f, 0.7f);
+        GameObject glassSpikeObj = Instantiate(glassSpikesPrefab, pos, Quaternion.identity);
+        glassSpikeObj.GetComponent<GlassSpike>().longDist = 5f;
+        float direction = spike.GetComponent<Rigidbody2D>().velocity.x;
+        direction = direction < 0f ? -1f : 1f;
+        glassSpikeObj.transform.rotation = Quaternion.Euler(0f, 0f, 90f * direction);
+        glassSpikeObj.GetComponent<Rigidbody2D>().velocity = spike.GetComponent<Rigidbody2D>().velocity * -1;
+    }
+
     private void Start()
     {
         
