@@ -7,7 +7,7 @@ public class GlassBubble : Bubble
     protected int numberOfSpikes = 10;
 
     [SerializeField] protected GameObject glassSpikesPrefab;
-    protected override void Init()
+    public override void Init()
     {
         type = 2;
         ammoCost = 3;
@@ -15,6 +15,7 @@ public class GlassBubble : Bubble
         hp = 2;
         speed = 3;
         windSensitivity = 0.5f;
+        base.Init();
     }
 
     protected override void OnCollisionEnter2D(Collision2D collision)
@@ -38,19 +39,20 @@ public class GlassBubble : Bubble
 
     protected void Explode() // create spikes around bubble that fly away and deal damage
     {
+        Vector2 position = new Vector2(transform.position.x - GetComponent<Rigidbody2D>().velocity.x / 5f, transform.position.y);
         for (int i = 0; i < numberOfSpikes; i++)
         {
-            GameObject spike = Instantiate(glassSpikesPrefab, transform.position, Quaternion.identity);
+            GameObject spike = Instantiate(glassSpikesPrefab, position, Quaternion.identity);
             spike.transform.rotation = Quaternion.Euler(0f, 0f, 360f / numberOfSpikes * i);
         }
     }
 
     private void Start()
     {
-        Init();
+        
     }
     private void Update()
     {
-        transform.position += new Vector3(0.05f, 0f, 0f) * speed;
+        
     }
 }

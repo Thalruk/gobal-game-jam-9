@@ -5,7 +5,7 @@ using UnityEngine;
 public class LavaBubble : Bubble{
 
     [SerializeField] protected GameObject lavaSpillPrefab;
-    protected override void Init()
+    public override void Init()
     {
         type = 3;
         ammoCost = 4;
@@ -13,6 +13,7 @@ public class LavaBubble : Bubble{
         hp = 3;
         speed = 2;
         windSensitivity = 0.3f;
+        base.Init();
     }
 
     protected override void OnCollisionEnter2D(Collision2D collision)
@@ -36,12 +37,10 @@ public class LavaBubble : Bubble{
 
     protected void SpillOnFloor() // spill lava on floor witch deal damage over time
     {
-        GameObject lavaSpill = Instantiate(lavaSpillPrefab);
-        lavaSpill.GetComponent<Rigidbody2D>().AddForce(Vector2.up * 100f);
+        GameObject lavaSpill = Instantiate(lavaSpillPrefab, transform.position, Quaternion.identity);
     }
 
     private void Start()
     {
-        GetComponent<Rigidbody2D>().velocity = Vector2.right;
     }
 }

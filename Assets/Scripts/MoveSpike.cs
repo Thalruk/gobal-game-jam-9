@@ -12,7 +12,6 @@ public class MoveSpike : MonoBehaviour
     {
         startPosition = transform.position;
         finalPosition = startPosition + (Vector2)transform.up * 3f;
-        print(transform.forward);
     }
 
     void Update()
@@ -21,5 +20,14 @@ public class MoveSpike : MonoBehaviour
         time += Time.deltaTime;
         if ((Vector2)transform.position == finalPosition)
             Destroy(gameObject);
+    }
+
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        if(collision.gameObject.tag == "enemy")
+        {
+            collision.gameObject.GetComponent<Enemy>().GetDamage(1);
+            Destroy(gameObject);
+        }
     }
 }

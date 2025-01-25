@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class SoapBubble : Bubble
 {
-    protected override void Init()
+    public override void Init()
     {
         type = 0;
         ammoCost = 1;
@@ -12,6 +12,7 @@ public class SoapBubble : Bubble
         hp = 1;
         speed = 4;
         windSensitivity = 1f;
+        base.Init();
     }
 
     protected override void OnCollisionEnter2D(Collision2D collision)
@@ -54,10 +55,6 @@ public class SoapBubble : Bubble
 
     private void Start()
     {
-        Init();
-    }
-    private void Update()
-    {
-        transform.position += new Vector3(0.05f, 0f, 0f) * speed;
+       
     }
 }
