@@ -7,14 +7,16 @@ using UnityEngine;
 public abstract class Bubble : MonoBehaviour
 {
     protected int type; // bubble type: 0 - soap, 1 - stone, 2 - glass, 3 - lava
-    protected int ammoCost; // 1, 2, 3, 4
+    public int ammoCost; // 1, 2, 3, 4
     protected int damage; // 1, 2, 3, 4
     protected int hp; // 1, 4, 2, 3
     protected int speed; //4, 1, 3, 2
     protected float windSensitivity; // how much is bubble pushed away or slowed by wind
-    protected bool charged;
+    public bool charged;
 
-    protected virtual void Init() {}
+    public virtual void Init() {
+        GetComponent<Rigidbody2D>().velocity *= speed;
+    }
 
     protected virtual void OnCollisionEnter2D(Collision2D collision)
     {
@@ -23,7 +25,7 @@ public abstract class Bubble : MonoBehaviour
         {
             GameObject enemy = collision.gameObject;
             // call funtion on hitted enemy
-            if (!charged) // special attack
+            if (charged) // special attack
             {
                 print("Charged attack");
                 ChargedAttack(enemy);

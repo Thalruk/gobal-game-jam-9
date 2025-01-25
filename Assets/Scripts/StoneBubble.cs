@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class StoneBubble : Bubble
 {
-    protected override void Init()
+    public override void Init()
     {
         type = 1;
         ammoCost = 2;
@@ -12,6 +12,7 @@ public class StoneBubble : Bubble
         hp = 4;
         speed = 1;
         windSensitivity = 0.1f;
+        base.Init();
     }
 
     protected override void OnCollisionEnter2D(Collision2D collision)
@@ -49,8 +50,7 @@ public class StoneBubble : Bubble
 
     private void Start()
     {
-        Init();
-        GetComponent<Rigidbody2D>().velocity = Vector2.right;
+       
     }
     private void Update()
     {

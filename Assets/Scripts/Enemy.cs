@@ -11,6 +11,7 @@ public class Enemy : MonoBehaviour
     void Start()
     {
         rigidbody2D = GetComponent<Rigidbody2D>();
+        pushVector = Vector2.zero;
     }
 
     // Update is called once per frame
@@ -28,6 +29,7 @@ public class Enemy : MonoBehaviour
                 Destroy(gameObject.transform.GetChild(0).gameObject);
                 GetComponent<Rigidbody2D>().gravityScale = 1f;
                 fly = false;
+                pushVector.y = 0f;
             }
         }
         if (pushBack)
@@ -38,6 +40,7 @@ public class Enemy : MonoBehaviour
             if (rigidbody2D.velocity.x == 0f)
             {
                 pushBack = false;
+                pushVector.x = 0f;
             }
         }
     }
@@ -56,7 +59,7 @@ public class Enemy : MonoBehaviour
     public void PushBack(Vector2 _pushVector)
     {
         timePush = 0f;
-        pushVector.x += _pushVector.x * 500f;
+        pushVector.x += _pushVector.x * 200f;
         startPosition = transform.position;
         endPosition = startPosition + pushVector;
 
