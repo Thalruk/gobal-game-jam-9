@@ -147,7 +147,7 @@ Rigidbody2D:
   m_Mass: 1
   m_LinearDrag: 0
   m_AngularDrag: 0.05
-  m_GravityScale: 1
+  m_GravityScale: 10
   m_Material: {fileID: 0}
   m_IncludeLayers:
     serializedVersion: 2
@@ -172,3 +172,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   spikePrefab: {fileID: 3895735970682893886, guid: cacc84fadb1480f40acb00d52f21b690, type: 3}
+  damage: 1
+  hp: 10
+  walkTime: 0
+  enemySprites: []
