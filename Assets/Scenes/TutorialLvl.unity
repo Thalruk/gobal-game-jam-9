@@ -13186,8 +13186,8 @@ MonoBehaviour:
   scoreMaxOptional: 0
   timer: 0
   timerStopped: 0
-  timerText: {fileID: 0}
-  nextLevel: MainMenu
+  timerText: {fileID: 1988909091}
+  nextLevel: SceneSelection
 --- !u!1 &1674783007
 GameObject:
   m_ObjectHideFlags: 0
@@ -13591,8 +13591,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: New Text
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
-  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: f890fa2996c47a741b8c40c42d7ed475, type: 2}
+  m_sharedMaterial: {fileID: -102248108270494913, guid: f890fa2996c47a741b8c40c42d7ed475, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
