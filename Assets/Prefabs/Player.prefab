@@ -523,7 +523,11 @@ MonoBehaviour:
   - {fileID: 5072556952952347031, guid: 4fccf35b50d6f134faa84291e52265ff, type: 3}
   boostAttack: 0
   ammoFillImage: {fileID: 0}
-  ammoFillImages: []
+  ammoFillImages:
+  - {fileID: 21300000, guid: b55168d0ea0086f43a644fb6c4c74bcc, type: 3}
+  - {fileID: 21300000, guid: 2547b25c15a8753439f7ff6f072ef098, type: 3}
+  - {fileID: 21300000, guid: 5df19c54c871df346807d80a1885ef31, type: 3}
+  - {fileID: 21300000, guid: e0237ebb0f75b40469f2eac0962f76ab, type: 3}
   heartHolder: {fileID: 0}
   heart: {fileID: 624116266207196298, guid: 281dc19a9ef460e4c90c98a0c52f3d9a, type: 3}
   startingHealth: 0

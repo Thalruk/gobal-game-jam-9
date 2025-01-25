@@ -62,8 +62,8 @@ public class Player : MonoBehaviour
         rb = GetComponent<Rigidbody2D>();
         ChangeHealth(startingHealth);
         ChangeAmmo(maxAmmo);
-        //ammoSlider.maxValue = maxAmmo;
-        //ammoFillImage.sprite = ammoFillImages[activeBubble];
+        ammoSlider.maxValue = maxAmmo;
+        ammoFillImage.sprite = ammoFillImages[activeBubble];
 
 
     }
@@ -217,7 +217,7 @@ public class Player : MonoBehaviour
     public void ChangeAmmo(int value)
     {
         ammo = Mathf.Clamp(ammo + value, 0, maxAmmo);
-        //ammoSlider.value = ammo;
+        ammoSlider.value = ammo;
     }
 
     public void CheckHealth()

@@ -397,7 +397,7 @@ PrefabInstance:
     - target: {fileID: 334901266815404935, guid: 43ee26d8c3cd39f43864c83ffb4301f1, type: 3}
       propertyPath: ammoFillImages.Array.data[1]
       value: 
-      objectReference: {fileID: 21300000, guid: 52045d722478e544d8ed7ab599f9087a, type: 3}
+      objectReference: {fileID: 21300000, guid: 2547b25c15a8753439f7ff6f072ef098, type: 3}
     - target: {fileID: 334901266815404935, guid: 43ee26d8c3cd39f43864c83ffb4301f1, type: 3}
       propertyPath: ammoFillImages.Array.data[2]
       value: 
