@@ -112,5 +112,4 @@ MonoBehaviour:
   to: {fileID: 5593020852279977486}
   elevatorPrefab: {fileID: 3488517688166311912, guid: 897669b9c55af4043a63998dbeef52a3, type: 3}
   elevatorObject: {fileID: 0}
-  cooldown: 5
-  speed: 20
+  speed: 15
