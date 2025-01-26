@@ -97,7 +97,7 @@ AnimationClip:
   - time: 0.75
     functionName: DestroyHeart
     data: 
-    objectReferenceParameter: {fileID: 0}
+    objectReferenceParameter: {fileID: 624116266207196298, guid: 281dc19a9ef460e4c90c98a0c52f3d9a, type: 3}
     floatParameter: 0
     intParameter: 0
     messageOptions: 0

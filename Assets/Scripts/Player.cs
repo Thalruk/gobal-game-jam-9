@@ -263,6 +263,13 @@ public class Player : MonoBehaviour
 
     public void Die()
     {
+        foreach (Enemy item in FindObjectsOfTypeAll(typeof(Enemy)))
+        {
+            if (item.gameObject.activeInHierarchy)
+            {
+                Destroy(item.gameObject);
+            }
+        }
         Cursor.visible = true;
         Cursor.lockState = CursorLockMode.Confined;
         Destroy(gameObject);

@@ -12969,6 +12969,14 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 797029258}
     m_Modifications:
+    - target: {fileID: 590863370304395430, guid: f636a56a9bf1b9e4c9019d07baa7579e, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 35383975}
+    - target: {fileID: 590863370304395430, guid: f636a56a9bf1b9e4c9019d07baa7579e, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: Restart
+      objectReference: {fileID: 0}
     - target: {fileID: 3674769277169382241, guid: f636a56a9bf1b9e4c9019d07baa7579e, type: 3}
       propertyPath: m_Name
       value: GameOverPanel
