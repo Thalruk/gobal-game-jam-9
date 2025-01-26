@@ -7064,7 +7064,7 @@ PrefabInstance:
       objectReference: {fileID: 624116266207196298, guid: 281dc19a9ef460e4c90c98a0c52f3d9a, type: 3}
     - target: {fileID: 334901266815404935, guid: 43ee26d8c3cd39f43864c83ffb4301f1, type: 3}
       propertyPath: speed
-      value: 10
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 334901266815404935, guid: 43ee26d8c3cd39f43864c83ffb4301f1, type: 3}
       propertyPath: maxAmmo
@@ -7092,7 +7092,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 334901266815404935, guid: 43ee26d8c3cd39f43864c83ffb4301f1, type: 3}
       propertyPath: speedDefault
-      value: 10
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 334901266815404935, guid: 43ee26d8c3cd39f43864c83ffb4301f1, type: 3}
       propertyPath: ammoFillImage
