@@ -12494,7 +12494,7 @@ MonoBehaviour:
   timer: 0
   timerStopped: 0
   timerText: {fileID: 1988909091}
-  nextLevel: SceneSelection
+  nextLevel: lvl6
 --- !u!1 &1674783007
 GameObject:
   m_ObjectHideFlags: 0
