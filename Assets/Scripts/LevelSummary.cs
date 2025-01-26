@@ -36,8 +36,27 @@ public class LevelSummary : MonoBehaviour
         }
 
         PlayerPrefs.SetFloat($"{SceneManager.GetActiveScene().name} time", LevelManager.Instance.timer);
-        PlayerPrefs.SetFloat($"{SceneManager.GetActiveScene().name} score percent", LevelManager.Instance.score / LevelManager.Instance.scoreMax);
-        PlayerPrefs.SetFloat($"{SceneManager.GetActiveScene().name} optional score percent", LevelManager.Instance.scoreOptional / LevelManager.Instance.scoreMaxOptional);
+        if (LevelManager.Instance.scoreMax != 0)
+        {
+            PlayerPrefs.SetFloat($"{SceneManager.GetActiveScene().name} score percent", LevelManager.Instance.score / LevelManager.Instance.scoreMax);
+        }
+        else
+        {
+            PlayerPrefs.SetFloat($"{SceneManager.GetActiveScene().name} score percent", 1);
+
+        }
+
+
+        if (LevelManager.Instance.scoreMaxOptional != 0)
+        {
+            PlayerPrefs.SetFloat($"{SceneManager.GetActiveScene().name} optional score percent", LevelManager.Instance.scoreOptional / LevelManager.Instance.scoreMaxOptional);
+
+        }
+        else
+        {
+            PlayerPrefs.SetFloat($"{SceneManager.GetActiveScene().name} optional score percent", 1);
+        }
+
         PlayerPrefs.Save();
 
         //zrobic slider i procenty i gwiazdki w zaleznosci od zebrania

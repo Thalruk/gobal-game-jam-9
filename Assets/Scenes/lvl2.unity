@@ -7180,7 +7180,6 @@ RectTransform:
   - {fileID: 1018648657}
   - {fileID: 466643752}
   - {fileID: 1988909090}
-  - {fileID: 1611399880}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
@@ -7994,6 +7993,10 @@ PrefabInstance:
       propertyPath: startingHealth
       value: 2
       objectReference: {fileID: 0}
+    - target: {fileID: 334901266815404935, guid: 43ee26d8c3cd39f43864c83ffb4301f1, type: 3}
+      propertyPath: ammoBottleImage
+      value: 
+      objectReference: {fileID: 461867247}
     - target: {fileID: 334901266815404935, guid: 43ee26d8c3cd39f43864c83ffb4301f1, type: 3}
       propertyPath: bubbles.Array.size
       value: 4
@@ -13240,58 +13243,6 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: dd4e726ff08a7e443b966a95ff57d034, type: 3}
---- !u!1 &1611399879
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1611399880}
-  - component: {fileID: 1611399881}
-  m_Layer: 0
-  m_Name: GameObject
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &1611399880
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1611399879}
-  serializedVersion: 2
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -905.8869, y: -784.45953, z: 0}
-  m_LocalScale: {x: 26.682991, y: 26.682991, z: 26.682991}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 797029258}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1611399881
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1611399879}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 252f89725fa601247bf0068ab4f77aff, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  score: 0
-  scoreOptional: 0
-  scoreMax: 0
-  scoreMaxOptional: 0
-  timer: 0
-  timerStopped: 0
-  timerText: {fileID: 1988909091}
-  nextLevel: SceneSelection
 --- !u!1 &1674783007
 GameObject:
   m_ObjectHideFlags: 0

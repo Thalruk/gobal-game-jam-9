@@ -6636,6 +6636,10 @@ PrefabInstance:
       value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 334901266815404935, guid: 43ee26d8c3cd39f43864c83ffb4301f1, type: 3}
+      propertyPath: ammoBottleImage
+      value: 
+      objectReference: {fileID: 750609843}
+    - target: {fileID: 334901266815404935, guid: 43ee26d8c3cd39f43864c83ffb4301f1, type: 3}
       propertyPath: bubbles.Array.size
       value: 4
       objectReference: {fileID: 0}
@@ -13127,7 +13131,7 @@ GameObject:
   - component: {fileID: 748039236}
   - component: {fileID: 748039235}
   m_Layer: 0
-  m_Name: GameObject
+  m_Name: LevelManager
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

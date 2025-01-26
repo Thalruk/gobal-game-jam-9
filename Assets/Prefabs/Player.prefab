@@ -224,8 +224,17 @@ MonoBehaviour:
   - {fileID: 21300000, guid: 2547b25c15a8753439f7ff6f072ef098, type: 3}
   - {fileID: 21300000, guid: 5df19c54c871df346807d80a1885ef31, type: 3}
   - {fileID: 21300000, guid: e0237ebb0f75b40469f2eac0962f76ab, type: 3}
+  ammoBottleImage: {fileID: 0}
+  ammoBottleImages:
+  - {fileID: 21300000, guid: 318453d8e693b1c41b9dfe97547f89e8, type: 3}
+  - {fileID: 21300000, guid: 7bef10c20ddc2a940b246768655f324f, type: 3}
+  - {fileID: 21300000, guid: cc2f0465af246b04281a9cf43f7e2a0a, type: 3}
+  - {fileID: 21300000, guid: 6be30a020b079a74fb2af2c060d266cb, type: 3}
   refillAmmoTime: 0
   restDelay: 1
+  startStone: 0
+  startGlass: 0
+  startLava: 0
   heartHolder: {fileID: 0}
   heart: {fileID: 624116266207196298, guid: 281dc19a9ef460e4c90c98a0c52f3d9a, type: 3}
   startingHealth: 2

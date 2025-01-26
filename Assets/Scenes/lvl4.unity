@@ -1936,7 +1936,7 @@ PrefabInstance:
       objectReference: {fileID: 436153878}
     - target: {fileID: 334901266815404935, guid: 43ee26d8c3cd39f43864c83ffb4301f1, type: 3}
       propertyPath: mask.m_Bits
-      value: 256
+      value: 16640
       objectReference: {fileID: 0}
     - target: {fileID: 334901266815404935, guid: 43ee26d8c3cd39f43864c83ffb4301f1, type: 3}
       propertyPath: jumpStrength
@@ -1958,6 +1958,10 @@ PrefabInstance:
       propertyPath: startingHealth
       value: 2
       objectReference: {fileID: 0}
+    - target: {fileID: 334901266815404935, guid: 43ee26d8c3cd39f43864c83ffb4301f1, type: 3}
+      propertyPath: ammoBottleImage
+      value: 
+      objectReference: {fileID: 600520938}
     - target: {fileID: 334901266815404935, guid: 43ee26d8c3cd39f43864c83ffb4301f1, type: 3}
       propertyPath: bubbles.Array.size
       value: 4
@@ -2432,12 +2436,20 @@ PrefabInstance:
       value: Point (8)
       objectReference: {fileID: 0}
     - target: {fileID: 5308362732507273421, guid: dd4e726ff08a7e443b966a95ff57d034, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 0.6844389
+      objectReference: {fileID: 0}
+    - target: {fileID: 5308362732507273421, guid: dd4e726ff08a7e443b966a95ff57d034, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 0.84167
+      objectReference: {fileID: 0}
+    - target: {fileID: 5308362732507273421, guid: dd4e726ff08a7e443b966a95ff57d034, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -12.4
+      value: -12.491
       objectReference: {fileID: 0}
     - target: {fileID: 5308362732507273421, guid: dd4e726ff08a7e443b966a95ff57d034, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -121.07
+      value: -121.037
       objectReference: {fileID: 0}
     - target: {fileID: 5308362732507273421, guid: dd4e726ff08a7e443b966a95ff57d034, type: 3}
       propertyPath: m_LocalPosition.z
