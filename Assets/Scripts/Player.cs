@@ -206,7 +206,7 @@ public class Player : MonoBehaviour
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        if (collision.transform.CompareTag("trap"))
+        if (collision.transform.CompareTag("trap") || collision.transform.CompareTag("enemy"))
         {
             ChangeHealth(-1);
         }
