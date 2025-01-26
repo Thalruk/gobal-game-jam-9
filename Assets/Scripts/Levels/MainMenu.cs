@@ -19,6 +19,7 @@ public class MainMenu : MonoBehaviour
 
     private void Awake()
     {
+        PlayerPrefs.DeleteAll();
         Cursor.SetCursor(normalCursor, Vector2.zero, CursorMode.ForceSoftware);
     }
     private void Update()
