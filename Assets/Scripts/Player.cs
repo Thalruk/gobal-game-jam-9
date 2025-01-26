@@ -34,8 +34,10 @@ public class Player : MonoBehaviour
     [SerializeField] public Slider ammoSlider;
     bool canShoot = true;
     [SerializeField] GameObject[] bubbles;
-    [SerializeField] Image ammoFillImage;
-    [SerializeField] Sprite[] ammoFillImages;
+    [SerializeField] public Image ammoFillImage;
+    [SerializeField] public Sprite[] ammoFillImages;
+    [SerializeField] public Image ammoBottleImage;
+    [SerializeField] public Sprite[] ammoBottleImages;
     [SerializeField] float refillAmmoTime = 0f;
     [SerializeField] float restDelay = 1f;
     [SerializeField] int startStone, startGlass, startLava;
@@ -115,7 +117,7 @@ public class Player : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.Space) && !isGrounded && rb.velocity.y != 0 && !spawnedBubble)
         {
             GameObject jumpbubbleObject = Instantiate(jumpBubble, (Vector2)groundCheckTransform.transform.position + Vector2.down * 0.2f, Quaternion.identity);
-            rb.velocity = new Vector2(rb.velocity.x, jumpStrength * 0.5f);
+            rb.velocity = new Vector2(rb.velocity.x, jumpStrength * 0.8f);
             spawnedBubble = true;
             Destroy(jumpbubbleObject, 0.2f);
         }
@@ -126,6 +128,7 @@ public class Player : MonoBehaviour
             activeBubble = (activeBubble + 1) % 4;
             print("Active bubble: " + activeBubble);
             ammoFillImage.sprite = ammoFillImages[activeBubble];
+            ammoBottleImage.sprite = ammoBottleImages[activeBubble];
             ChangeAmmo(activeBubble, 0);
 
         }
@@ -134,6 +137,7 @@ public class Player : MonoBehaviour
             activeBubble = activeBubble - 1 < 0 ? 3 : activeBubble - 1;
             print("Active bubble: " + activeBubble);
             ammoFillImage.sprite = ammoFillImages[activeBubble];
+            ammoBottleImage.sprite = ammoBottleImages[activeBubble];
             ChangeAmmo(activeBubble, 0);
         }
 
@@ -142,7 +146,7 @@ public class Player : MonoBehaviour
             canShoot = true;
         }
 
-        if (Input.GetMouseButtonUp(0) && canShoot)
+        if (Input.GetMouseButtonUp(0) && canShoot && ammo[activeBubble] > 0)
         {
             restDelay = 1f;
             Vector2 pos = (Vector2)transform.position;

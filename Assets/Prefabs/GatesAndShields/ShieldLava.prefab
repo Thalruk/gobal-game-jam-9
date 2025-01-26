@@ -136,10 +136,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   shield: {fileID: 0}
   decals:
-  - {fileID: 21300000, guid: 4ebb2faca8188f142ac33c59670e9c9b, type: 3}
-  - {fileID: 21300000, guid: 43b86fd8c6198064e95618506fe5c125, type: 3}
-  - {fileID: 21300000, guid: 339644d0df586234d82c9c42bc299121, type: 3}
-  - {fileID: 21300000, guid: d93380c79b115b24b80caad721c1a8e8, type: 3}
+  - {fileID: 21300000, guid: 04b66bc563af39c468ff6c63aafdddbf, type: 3}
+  - {fileID: 21300000, guid: 4e54c9c35d021b149b630068c2435d07, type: 3}
+  - {fileID: 21300000, guid: 1a02c62089221d649b2421d853424292, type: 3}
+  - {fileID: 21300000, guid: 5b7ff355281efb94589d54c2695b053c, type: 3}
   shieldType: 3
   shooted: 0
   gate: {fileID: 0}
