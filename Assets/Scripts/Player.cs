@@ -168,6 +168,7 @@ public class Player : MonoBehaviour
                 }
             }
         }
+        /*
         if (Input.GetKey(KeyCode.Q) && !isShield && shieldCooldown == 0f)
         {
             bubbleShieldObj = Instantiate(bubbles[activeBubble], transform.position, Quaternion.identity);
@@ -185,6 +186,7 @@ public class Player : MonoBehaviour
             RemoveShield();
         }
         shieldCooldown = Mathf.Clamp(shieldCooldown - Time.deltaTime, 0f, 3f);
+        */
         restDelay = Mathf.Clamp(restDelay - Time.deltaTime, 0f, 1f);
     }
 
