@@ -40,6 +40,7 @@ public class Spike : MonoBehaviour
             Player.Instance.ChangeHealth(-1);
             Destroy(gameObject);
         }
+        Destroy(gameObject);
 
     }
 }

@@ -103,7 +103,7 @@ public class Enemy : MonoBehaviour
             timeHitted = 1f;
             rb.velocity = new Vector2(1f * hitDirection, 3f);
         }
-        if (collision.gameObject.tag == "Wall")
+        if (collision.gameObject.tag == "Wall" || collision.gameObject.tag == "BLock")
         {
             speed = speed * -1f;
         }
