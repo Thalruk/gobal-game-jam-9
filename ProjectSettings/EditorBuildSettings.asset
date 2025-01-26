@@ -12,21 +12,27 @@ EditorBuildSettings:
     path: Assets/Scenes/OptionsMenu.unity
     guid: d8d936525b137084dbef593388abe62a
   - enabled: 1
-    path: Assets/Scenes/Bartek.unity
-    guid: e10503f2cdb4b774bb3f03845c486a64
-  - enabled: 1
     path: Assets/Scenes/Intro.unity
     guid: 66a3d399b5da0384dbb95bce5c02ee5a
   - enabled: 1
     path: Assets/Scenes/SceneSelection.unity
     guid: 379c4cb3cc2fede43a7971748322d1a8
   - enabled: 1
-    path: Assets/Scenes/TutorialLvl.unity
-    guid: 1f3a6fe5a9d6c5c46904853a39e2080d
-  - enabled: 1
-    path: Assets/Scenes/Lepsze Pjotera.unity
+    path: Assets/Scenes/lvl1.unity
     guid: 85fde7f280767f445b1cae34c44548b9
   - enabled: 1
-    path: Assets/Scenes/lvl1.unity
+    path: Assets/Scenes/lvl2.unity
+    guid: 1f3a6fe5a9d6c5c46904853a39e2080d
+  - enabled: 1
+    path: Assets/Scenes/lvl3.unity
     guid: 5be09168032243d4281cc5353529305a
+  - enabled: 1
+    path: Assets/Scenes/lvl4.unity
+    guid: de30fea2e0dea1e4a8b1bb1ebc58ca10
+  - enabled: 1
+    path: Assets/Scenes/lvl5.unity
+    guid: 238a19d83e1bd1340ade4a28886bb76d
+  - enabled: 1
+    path: Assets/Scenes/lvl6.unity
+    guid: ff2fbdb0a76638846a421c05b444c13b
   m_configObjects: {}
