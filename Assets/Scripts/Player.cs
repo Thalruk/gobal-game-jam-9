@@ -1,5 +1,4 @@
 using UnityEngine;
-using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class Player : MonoBehaviour
@@ -53,6 +52,7 @@ public class Player : MonoBehaviour
     [Header("Health")]
     [SerializeField] GameObject heartHolder;
     [SerializeField] GameObject heart;
+    [SerializeField] GameObject gameOverPanel;
     [SerializeField] int startingHealth;
     [SerializeField] public int currentHealth;
     [SerializeField] bool invincible = false;
@@ -255,9 +255,16 @@ public class Player : MonoBehaviour
     {
         if (currentHealth == 0)
         {
-            Destroy(gameObject);
-            SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+            Die();
         }
+    }
+
+    public void Die()
+    {
+        Cursor.visible = true;
+        Cursor.lockState = CursorLockMode.Confined;
+        Destroy(gameObject);
+        gameOverPanel.SetActive(true);
     }
     private void TurnOffInvicibility()
     {

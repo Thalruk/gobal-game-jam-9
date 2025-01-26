@@ -1,5 +1,4 @@
 using UnityEngine;
-using UnityEngine.SceneManagement;
 
 public class Killzone : MonoBehaviour
 {
@@ -7,7 +6,7 @@ public class Killzone : MonoBehaviour
     {
         if (collision.transform.CompareTag("Player"))
         {
-            SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+            Player.Instance.Die();
         }
     }
 }
