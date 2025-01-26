@@ -38,6 +38,7 @@ public class Player : MonoBehaviour
     [SerializeField] Sprite[] ammoFillImages;
     [SerializeField] float refillAmmoTime = 0f;
     [SerializeField] float restDelay = 1f;
+    [SerializeField] int startStone, startGlass, startLava;
 
     Bubble bubbleShield;
     GameObject bubbleShieldObj;
@@ -55,7 +56,7 @@ public class Player : MonoBehaviour
     [SerializeField] bool invincible = false;
     private void Awake()
     {
-        ammo = new int[4] { 0, 0, 0, 0 };
+        ammo = new int[4] { 0, startStone, startGlass, startLava };
         if (Instance != null && Instance != this)
         {
             Destroy(Instance);
