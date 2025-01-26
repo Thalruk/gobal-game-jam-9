@@ -6614,7 +6614,7 @@ PrefabInstance:
       objectReference: {fileID: 77900494}
     - target: {fileID: 334901266815404935, guid: 43ee26d8c3cd39f43864c83ffb4301f1, type: 3}
       propertyPath: mask.m_Bits
-      value: 256
+      value: 16640
       objectReference: {fileID: 0}
     - target: {fileID: 334901266815404935, guid: 43ee26d8c3cd39f43864c83ffb4301f1, type: 3}
       propertyPath: jumpStrength

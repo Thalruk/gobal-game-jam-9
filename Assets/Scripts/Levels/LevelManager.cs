@@ -13,9 +13,6 @@ public class LevelManager : MonoBehaviour
     [SerializeField] public float timer = 0;
     [SerializeField] public bool timerStopped;
     [SerializeField] TextMeshProUGUI timerText;
-    [SerializeField] GameObject pauseMenu;
-    bool pauseMenuOn = false;
-
     [SerializeField] public string nextLevel;
 
     private void Awake()
@@ -32,22 +29,6 @@ public class LevelManager : MonoBehaviour
     }
     private void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Escape))
-        {
-            pauseMenuOn = !pauseMenuOn;
-            if (pauseMenuOn)
-            {
-                Time.timeScale = 0.0f;
-            }
-            else
-            {
-                Time.timeScale = 1;
-            }
-
-        }
-
-
-
         if (!timerStopped)
         {
             timer += Time.deltaTime;
@@ -55,20 +36,8 @@ public class LevelManager : MonoBehaviour
         timerText.text = timer.ToString("0.00");
     }
 
-    public void Resume()
-    {
-        pauseMenuOn = false;
-        pauseMenu.SetActive(false);
-        Time.timeScale = 1;
-    }
-
     public void Restart()
     {
         SceneManager.LoadScene(SceneManager.GetActiveScene().name);
-    }
-
-    public void LoadMenu()
-    {
-        SceneManager.LoadScene("MainMenu");
     }
 }
