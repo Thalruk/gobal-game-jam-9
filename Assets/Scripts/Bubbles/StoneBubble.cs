@@ -11,7 +11,7 @@ public class StoneBubble : Bubble
         ammoCost = 2;
         damage = 2;
         hp = 4;
-        speed = 1;
+        speed = 3;
         windSensitivity = 0.1f;
         base.Init();
     }

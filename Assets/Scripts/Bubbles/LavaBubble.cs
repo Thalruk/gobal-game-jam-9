@@ -10,7 +10,7 @@ public class LavaBubble : Bubble
         ammoCost = 4;
         damage = 4;
         hp = 3;
-        speed = 2;
+        speed = 3;
         windSensitivity = 0.3f;
         base.Init();
     }

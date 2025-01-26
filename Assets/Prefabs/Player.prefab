@@ -201,6 +201,7 @@ MonoBehaviour:
   speed: 5
   jumpStrength: 10
   direction: {x: 1, y: 0}
+  jumpBubble: {fileID: 8339882581628811368, guid: fc781fac389586e4fab531563bbe39f5, type: 3}
   graphics: {fileID: 6033600627692307105}
   groundCheckTransform: {fileID: 6032091869618065402}
   groundCheckRadius: 0.25

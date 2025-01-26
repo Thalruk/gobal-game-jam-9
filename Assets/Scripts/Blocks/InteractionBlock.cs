@@ -5,10 +5,11 @@ using UnityEngine;
 
 public class InteractionBlock : Blocks
 {
-    bool fly = false;
-    bool up = false;
-    bool down = false;
-    bool destroying = false;
+    [SerializeField] bool fly = false;
+    [SerializeField] bool up = false;
+    [SerializeField] bool down = false;
+    [SerializeField] bool destroying = false;
+    [SerializeField] bool pushing = false;
 
     Vector2 startPos;
     Vector2 endPos;
@@ -18,6 +19,7 @@ public class InteractionBlock : Blocks
     float upTime = 0f;
     float flyTime = 0f;
     float destroyingTime = 0f;
+    float pushingTime = 0f;
 
     protected override void OnCollisionEnter2D(Collision2D collision)
     {
@@ -53,10 +55,13 @@ public class InteractionBlock : Blocks
             // stone - pushing
             else if(bubble.type == 1)
             {
+                GetComponent<Rigidbody2D>().constraints = RigidbodyConstraints2D.FreezeRotation;
                 print("stone");
                 Vector2 vel = collision.gameObject.GetComponent<Rigidbody2D>().velocity;
                 int direction = vel.x < 0f ? -1 : 1;
 
+                pushing = true;
+                pushingTime = 0f;
                 GetComponent<Rigidbody2D>().AddForce(new Vector2(direction * 300f, 0f));
             }
             // glass - ???
@@ -67,6 +72,7 @@ public class InteractionBlock : Blocks
             // lava - destroying
             else if(bubble.type == 3)
             {
+
                 Vector2 offset = new Vector2(0f, GetComponent<BoxCollider2D>().size.y / 2f);
                 GameObject lava = Instantiate(bubble.GetComponent<LavaBubble>().lavaSpillPrefab);
                 
@@ -86,6 +92,7 @@ public class InteractionBlock : Blocks
 
     private void Update()
     {
+        
 
         // levitating
         if (up)
@@ -123,8 +130,13 @@ public class InteractionBlock : Blocks
         if (down)
         {
             GetComponent<Rigidbody2D>().gravityScale = 1f;
-            down = false;
-            GetComponent<Rigidbody2D>().constraints = RigidbodyConstraints2D.FreezeRotation;
+            GetComponent<Rigidbody2D>().constraints = RigidbodyConstraints2D.FreezeRotation | RigidbodyConstraints2D.FreezePositionX;
+            if(GetComponent<Rigidbody2D>().velocity == Vector2.zero)
+            {
+                down = false;
+                GetComponent<Rigidbody2D>().constraints = RigidbodyConstraints2D.FreezePositionX | RigidbodyConstraints2D.FreezeRotation;
+
+            }
 
         }
 
@@ -140,6 +152,20 @@ public class InteractionBlock : Blocks
             {
                 transform.localScale = Vector2.Lerp(new Vector2(1f, 1f), Vector2.zero, destroyingTime);
                 destroyingTime += Time.deltaTime;
+            }
+        }
+
+        if (pushing)
+        {
+            if (pushingTime > 1f)
+            { 
+                pushing = false;
+                pushingTime = 0f;
+                GetComponent<Rigidbody2D>().constraints = RigidbodyConstraints2D.FreezePositionX | RigidbodyConstraints2D.FreezeRotation;
+            }
+            else
+            {
+                pushingTime += Time.deltaTime;
             }
         }
     }

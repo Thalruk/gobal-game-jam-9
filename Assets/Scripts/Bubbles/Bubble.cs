@@ -22,7 +22,7 @@ public abstract class Bubble : MonoBehaviour
         GetComponent<Rigidbody2D>().velocity *= speed;
         isShield = false;
         damage = boostAttack ? damage + 1 : damage;
-        transform.localScale = charged ? new Vector2(3f, 3f) : new Vector2(1f, 1f);
+        transform.localScale = new Vector2(3f, 3f);
     }
 
     protected virtual void OnCollisionEnter2D(Collision2D collision)
