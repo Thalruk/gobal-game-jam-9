@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: 7840997149168557678}
   m_Layer: 0
   m_Name: InteractionCube
-  m_TagString: Untagged
+  m_TagString: Wall
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -171,3 +171,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b04532a6ab8e33a489a31afd9b54d50c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  fly: 0
+  up: 0
+  down: 0
+  destroying: 0
+  pushing: 0
