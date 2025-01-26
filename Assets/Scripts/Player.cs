@@ -147,6 +147,7 @@ public class Player : MonoBehaviour
             Vector2 pos = (Vector2)transform.position;
             GameObject bubbleObject = Instantiate(bubbles[activeBubble], pos, Quaternion.identity);
             Bubble bubble = bubbleObject.GetComponent<Bubble>();
+            bubbleObject.transform.localScale = new Vector2(3f, 3f);
             if (ammo[activeBubble] >= bubble.ammoCost)
             {
                 Rigidbody2D bubbleRigidbody2D = bubbleObject.GetComponent<Rigidbody2D>();

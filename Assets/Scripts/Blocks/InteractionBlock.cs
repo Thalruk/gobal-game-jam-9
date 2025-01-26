@@ -42,7 +42,7 @@ public class InteractionBlock : Blocks
 
                 float boxSize = GetComponent<SpriteRenderer>().bounds.size.x;
                 boxSize = boxSize * Mathf.Sqrt(2);
-                float scaleDiff = boxSize / bubble.GetComponent<SpriteRenderer>().bounds.size.x;
+                float scaleDiff = boxSize / bubble.GetComponent<SpriteRenderer>().bounds.size.x * 3f;
 
                 bubbleObj.transform.localScale = new Vector2(scaleDiff, scaleDiff);
                 
