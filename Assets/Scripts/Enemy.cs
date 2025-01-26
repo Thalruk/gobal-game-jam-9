@@ -16,6 +16,7 @@ public class Enemy : MonoBehaviour
     bool hitted = false;
     float timeHitted = 0f;
     float rotationTime = 0f;
+    [SerializeField] float speed = 10f;
     [SerializeField] Sprite[] enemySprites;
     void Start()
     {
@@ -102,6 +103,10 @@ public class Enemy : MonoBehaviour
             timeHitted = 1f;
             rb.velocity = new Vector2(1f * hitDirection, 3f);
         }
+        if (collision.gameObject.tag == "Wall")
+        {
+            speed = speed * -1f;
+        }
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
@@ -156,9 +161,11 @@ public class Enemy : MonoBehaviour
     {
         gameObject.GetComponent<SpriteRenderer>().sprite = enemySprites[0];
         transform.rotation = Quaternion.Euler(new Vector3(0f, 0f, 180f));
-        rb.velocity = new Vector2(Mathf.Sin(walkTime) * 3f, 0f);
+
+        rb.velocity = new Vector2(speed, 0f);
+        //rb.velocity = new Vector2(Mathf.Sin(walkTime) * 3f, 0f);
         walkTime = (walkTime + Time.deltaTime) % (Mathf.PI * 2f);
-        if (walkTime < Mathf.PI)
+        if (speed > 0)
         {
             GetComponent<SpriteRenderer>().flipX = true;
             rotationTime -= Time.deltaTime * 360f;
@@ -179,6 +186,7 @@ public class Enemy : MonoBehaviour
         float direction = Player.Instance.transform.position.x - transform.position.x;
         direction = direction < 0f ? -1f : 1f;
         GetComponent<SpriteRenderer>().flipX = direction < 0f ? false : true;
+        speed = direction < 0f ? Mathf.Abs(speed) * -1f : Mathf.Abs(speed);
         rb.velocity = Vector2.zero;
         if (canShoot)
         {

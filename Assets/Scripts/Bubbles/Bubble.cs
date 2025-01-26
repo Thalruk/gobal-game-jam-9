@@ -77,7 +77,10 @@ public abstract class Bubble : MonoBehaviour
         {
             Destroy(gameObject);
         }
-        Destroy(gameObject);
+        if (collision.gameObject.tag != "Spike")
+        {
+            Destroy(gameObject);
+        }
     }
 
     protected virtual void ChargedAttack(GameObject enemy) { }
