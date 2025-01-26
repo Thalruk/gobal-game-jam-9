@@ -1,6 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
-using TreeEditor;
 using UnityEngine;
 
 public class InteractionBlock : Blocks
@@ -23,12 +20,12 @@ public class InteractionBlock : Blocks
 
     protected override void OnCollisionEnter2D(Collision2D collision)
     {
-        if(collision.gameObject.tag == "Bubble")
+        if (collision.gameObject.tag == "Bubble")
         {
             Bubble bubble = collision.gameObject.GetComponent<Bubble>();
 
             // soap - levitating
-            if(bubble.type == 0)
+            if (bubble.type == 0)
             {
                 GetComponent<Rigidbody2D>().constraints = RigidbodyConstraints2D.FreezePositionX | RigidbodyConstraints2D.FreezeRotation;
                 startPos = transform.position;
@@ -45,7 +42,7 @@ public class InteractionBlock : Blocks
                 float scaleDiff = boxSize / bubble.GetComponent<SpriteRenderer>().bounds.size.x * 3f;
 
                 bubbleObj.transform.localScale = new Vector2(scaleDiff, scaleDiff);
-                
+
                 bubbleObj.transform.SetParent(transform);
 
                 //fly = true;
@@ -53,7 +50,7 @@ public class InteractionBlock : Blocks
 
             }
             // stone - pushing
-            else if(bubble.type == 1)
+            else if (bubble.type == 1)
             {
                 GetComponent<Rigidbody2D>().constraints = RigidbodyConstraints2D.FreezeRotation;
                 print("stone");
@@ -65,17 +62,17 @@ public class InteractionBlock : Blocks
                 GetComponent<Rigidbody2D>().AddForce(new Vector2(direction * 300f, 0f));
             }
             // glass - ???
-            else if(bubble.type == 2)
+            else if (bubble.type == 2)
             {
 
             }
             // lava - destroying
-            else if(bubble.type == 3)
+            else if (bubble.type == 3)
             {
 
                 Vector2 offset = new Vector2(0f, GetComponent<BoxCollider2D>().size.y / 2f);
                 GameObject lava = Instantiate(bubble.GetComponent<LavaBubble>().lavaSpillPrefab);
-                
+
                 float lavaSize = lava.GetComponent<SpriteRenderer>().bounds.size.x;
                 float boxSize = GetComponent<SpriteRenderer>().bounds.size.x;
                 float sizeDiffrent = boxSize / lavaSize;
@@ -92,7 +89,7 @@ public class InteractionBlock : Blocks
 
     private void Update()
     {
-        
+
 
         // levitating
         if (up)
@@ -113,7 +110,7 @@ public class InteractionBlock : Blocks
 
         if (fly)
         {
-            if(flyTime > 3f)
+            if (flyTime > 3f)
             {
                 fly = false;
                 down = true;
@@ -131,7 +128,7 @@ public class InteractionBlock : Blocks
         {
             GetComponent<Rigidbody2D>().gravityScale = 1f;
             GetComponent<Rigidbody2D>().constraints = RigidbodyConstraints2D.FreezeRotation | RigidbodyConstraints2D.FreezePositionX;
-            if(GetComponent<Rigidbody2D>().velocity == Vector2.zero)
+            if (GetComponent<Rigidbody2D>().velocity == Vector2.zero)
             {
                 down = false;
                 GetComponent<Rigidbody2D>().constraints = RigidbodyConstraints2D.FreezePositionX | RigidbodyConstraints2D.FreezeRotation;
@@ -142,7 +139,7 @@ public class InteractionBlock : Blocks
 
         if (destroying)
         {
-            if(destroyingTime > 1f)
+            if (destroyingTime > 1f)
             {
                 destroying = false;
                 destroyingTime = 0f;
@@ -158,7 +155,7 @@ public class InteractionBlock : Blocks
         if (pushing)
         {
             if (pushingTime > 1f)
-            { 
+            {
                 pushing = false;
                 pushingTime = 0f;
                 GetComponent<Rigidbody2D>().constraints = RigidbodyConstraints2D.FreezePositionX | RigidbodyConstraints2D.FreezeRotation;
