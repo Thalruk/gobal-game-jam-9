@@ -78,7 +78,7 @@ public abstract class Bubble : MonoBehaviour
         {
             Destroy(gameObject);
         }
-        //Destroy(gameObject);
+        Destroy(gameObject);
     }
 
     protected virtual void ChargedAttack(GameObject enemy) { }

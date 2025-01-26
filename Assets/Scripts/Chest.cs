@@ -50,7 +50,7 @@ public class Chest : MonoBehaviour
             bottle.GetComponent<SpriteRenderer>().color = Color.Lerp(new Color(1f, 1f, 1f, 0f), Color.white, showTime);
             showTime += Time.deltaTime;
 
-            if (showTime > 2f)
+            if (showTime > 1f)
             {
                 showTime = 1f;
                 isShowing = false;

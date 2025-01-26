@@ -15,12 +15,14 @@ public class Door : MonoBehaviour
 
     private void Awake()
     {
+        timeFade = 0f;
         source = GetComponent<AudioSource>();
     }
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        if (collision.gameObject.CompareTag("Player"))
+        if (collision.gameObject.tag == "Player")
         {
+            timeFade = 0f;
             startPos = Player.Instance.transform.position;
             GetComponent<SpriteRenderer>().sprite = openDoor;
             fade = true;
@@ -30,8 +32,9 @@ public class Door : MonoBehaviour
 
     private void OnCollisionStay2D(Collision2D collision)
     {
-        if (timeFade >= 0.5f && summarySpawned == false)
+        if (timeFade >= 1f && summarySpawned == false)
         {
+            print("UI");
             Instantiate(levelFinishUI, canvas.transform);
             summarySpawned = true;
 
